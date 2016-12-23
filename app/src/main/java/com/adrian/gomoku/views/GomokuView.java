@@ -330,6 +330,21 @@ public class GomokuView extends View {
         invalidate();
     }
 
+    /**
+     * 撤消
+     */
+    public void revoke() {
+        if (mIsWhite && mBlackArray.size() > 0) {
+            mBlackArray.remove(mBlackArray.size() - 1);
+            invalidate();
+            mIsWhite = !mIsWhite;
+        } else if (!mIsWhite && mWhiteArray.size() > 0) {
+            mWhiteArray.remove(mWhiteArray.size() - 1);
+            invalidate();
+            mIsWhite = !mIsWhite;
+        }
+    }
+
     @Override
     protected Parcelable onSaveInstanceState() {
         Bundle bundle = new Bundle();

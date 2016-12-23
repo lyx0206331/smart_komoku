@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.adrian.gomoku.R;
@@ -17,6 +18,7 @@ import static java.security.AccessController.getContext;
 public class MainActivity extends BaseActivity implements GomokuView.IGameOverListener {
 
     private GomokuView mGomokuView;
+    private AlertDialog mAlertDialog;
 
     private long mLastBackPress;
     private static final long mBackPressThreshold = 3500;
@@ -48,11 +50,19 @@ public class MainActivity extends BaseActivity implements GomokuView.IGameOverLi
 
     }
 
+    protected void revoke(View view) {
+        mGomokuView.revoke();
+    }
+
+    protected void restart(View view) {
+        mGomokuView.start();
+    }
+
     @Override
     public void onBackPressed() {
         long currentTime = System.currentTimeMillis();
         if (Math.abs(currentTime - mLastBackPress) > mBackPressThreshold) {
-            Toast.makeText(this, "再按一次返回退出", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.back_again_quit, Toast.LENGTH_SHORT).show();
             mLastBackPress = currentTime;
         } else {
             super.onBackPressed();
@@ -61,19 +71,23 @@ public class MainActivity extends BaseActivity implements GomokuView.IGameOverLi
 
     @Override
     public void gameOver(boolean isWhiteWin) {
-        String text = isWhiteWin ? "白棋胜利" : "黑棋胜利";
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(text).setPositiveButton("退出", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        }).setNegativeButton("再来一局", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mGomokuView.start();
-                dialog.cancel();
-            }
-        }).create().show();
+        int msgId = isWhiteWin ? R.string.white_win : R.string.black_win;
+        if (mAlertDialog == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            mAlertDialog = builder.setPositiveButton(R.string.quit, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            }).setNegativeButton(R.string.start_again, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mGomokuView.start();
+                    dialog.dismiss();
+                }
+            }).setCancelable(false).create();
+        }
+        mAlertDialog.setMessage(getString(msgId));
+        mAlertDialog.show();
     }
 }
