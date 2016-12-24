@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.adrian.gomoku.R;
@@ -15,10 +16,12 @@ import de.cketti.library.changelog.ChangeLog;
 
 import static java.security.AccessController.getContext;
 
-public class MainActivity extends BaseActivity implements GomokuView.IGameOverListener {
+public class MainActivity extends BaseActivity implements GomokuView.IGameOverListener, View.OnClickListener {
 
     private GomokuView mGomokuView;
     private AlertDialog mAlertDialog;
+    private Button mRevokeBtn;
+    private Button mRestartBtn;
 
     private long mLastBackPress;
     private static final long mBackPressThreshold = 3500;
@@ -37,7 +40,11 @@ public class MainActivity extends BaseActivity implements GomokuView.IGameOverLi
     protected void initViews() {
         setContentView(R.layout.activity_main);
         mGomokuView = (GomokuView) findViewById(R.id.gomoku_view);
+        mRevokeBtn = (Button) findViewById(R.id.btn_revoke);
+        mRestartBtn = (Button) findViewById(R.id.btn_restart);
         mGomokuView.setListener(this);
+        mRevokeBtn.setOnClickListener(this);
+        mRestartBtn.setOnClickListener(this);
 
         ChangeLog cl = new ChangeLog(this);
         if (cl.isFirstRun()) {
@@ -48,14 +55,6 @@ public class MainActivity extends BaseActivity implements GomokuView.IGameOverLi
     @Override
     protected void loadData() {
 
-    }
-
-    protected void revoke(View view) {
-        mGomokuView.revoke();
-    }
-
-    protected void restart(View view) {
-        mGomokuView.start();
     }
 
     @Override
@@ -89,5 +88,17 @@ public class MainActivity extends BaseActivity implements GomokuView.IGameOverLi
         }
         mAlertDialog.setMessage(getString(msgId));
         mAlertDialog.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_revoke:
+                mGomokuView.revoke();
+                break;
+            case R.id.btn_restart:
+                mGomokuView.start();
+                break;
+        }
     }
 }
