@@ -32,7 +32,7 @@ public class GomokuView extends View {
 
     private int mPanelWidth;
     private float mLineHeight;
-    private int MAX_LINE = 10;
+    private int MAX_LINE = 15;
     private int MAX_COUNT_IN_LINE = 5;
 
     private Paint mPaint = new Paint();
@@ -42,7 +42,7 @@ public class GomokuView extends View {
 
     private float ratioPieceOfLineHeight = 3 * 1.0f / 4;
 
-    private boolean mIsWhite = true;    //白棋先手，当前轮到白棋
+    private boolean mIsWhite = false;    //执黑先行
     private ArrayList<Point> mWhiteArray = new ArrayList<>();
     private ArrayList<Point> mBlackArray = new ArrayList<>();
 
@@ -327,6 +327,7 @@ public class GomokuView extends View {
         mBlackArray.clear();
         mIsGameOver = false;
         mIsWhiteWinner = false;
+        mIsWhite = false;
         invalidate();
     }
 
