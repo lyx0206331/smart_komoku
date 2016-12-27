@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.activity.BaseActivity;
+import com.adrian.gomoku.ai.GomokuAI;
 import com.adrian.gomoku.views.GomokuView;
 
 import de.cketti.library.changelog.ChangeLog;
@@ -54,7 +55,6 @@ public class MainActivity extends BaseActivity implements GomokuView.IGameOverLi
 
     @Override
     protected void loadData() {
-
     }
 
     @Override

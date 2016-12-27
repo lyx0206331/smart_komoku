@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.adrian.gomoku.R;
+import com.adrian.gomoku.ai.GomokuAI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,7 @@ public class GomokuView extends View {
     private boolean mIsWhiteWinner;
 
     private IGameOverListener listener;
+    private GomokuAI gomokuAI;
 
     public GomokuView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -64,6 +66,8 @@ public class GomokuView extends View {
 
         mWhitePiece = BitmapFactory.decodeResource(getResources(), R.drawable.piece1);
         mBlackPiece = BitmapFactory.decodeResource(getResources(), R.drawable.piece0);
+
+        gomokuAI = new GomokuAI(MAX_LINE);
     }
 
     @Override
@@ -118,8 +122,14 @@ public class GomokuView extends View {
 
             if (mIsWhite) {
                 mWhiteArray.add(p);
+//                if (gomokuAI.isAiWin(p)) {
+//                    listener.gameOver(true);
+//                }
             } else {
                 mBlackArray.add(p);
+//                if (gomokuAI.isPlayerWin(p)) {
+//                    listener.gameOver(false);
+//                }
             }
             invalidate();
             mIsWhite = !mIsWhite;
@@ -151,8 +161,6 @@ public class GomokuView extends View {
             mIsGameOver = true;
             mIsWhiteWinner = whiteWin;
 
-//            String text = mIsWhiteWinner ? "白棋胜利" : "黑棋胜利";
-//            Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
             if (listener != null) {
                 listener.gameOver(mIsWhiteWinner);
             }
