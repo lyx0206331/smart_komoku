@@ -16,7 +16,7 @@ public class GomokuAI {
     private boolean[][][] wins;
     private int[] playerWin;
     private int[] aiWin;
-    private int winCount = 572;
+    private int winCount = 572; //赢和可能种数
 
     public GomokuAI(int maxLineCount) {
         this.maxLineCount = maxLineCount;
@@ -26,6 +26,10 @@ public class GomokuAI {
         initCount();
     }
 
+    /**
+     * 以count为序列，列出可能的成功排列
+     * wins[x][y][count]表示第count种成功排列，xy表示对应的一个点坐标
+     */
     private void initCount() {
         for (int i = 0; i < maxLineCount; i++) {    //横向
             for (int j = 0; j < maxLineCount - maxCountInLine + 1; j++) {
@@ -65,6 +69,12 @@ public class GomokuAI {
         Log.e(TAG, "win count:" + count);
     }
 
+    /**
+     * 是否玩家胜
+     *
+     * @param playerPoint
+     * @return
+     */
     public boolean isPlayerWin(Point playerPoint) {
         for (int i = 0; i < count; i++) {
             if (wins[playerPoint.x][playerPoint.y][i]) {
@@ -78,6 +88,11 @@ public class GomokuAI {
         return false;
     }
 
+    /**
+     * 是否ai胜
+     * @param aiPoint
+     * @return
+     */
     public boolean isAiWin(Point aiPoint) {
         for (int i = 0; i < count; i++) {
             if (wins[aiPoint.x][aiPoint.y][i]) {

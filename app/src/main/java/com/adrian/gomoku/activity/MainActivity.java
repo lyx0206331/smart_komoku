@@ -1,9 +1,11 @@
 package com.adrian.gomoku.activity;
 
 import android.content.DialogInterface;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -34,6 +36,8 @@ public class MainActivity extends BaseActivity implements GomokuView.IGameOverLi
 
     @Override
     protected void initVariables() {
+
+        Log.e("SDK_VERSION", "系统版本：" + Build.VERSION.SDK_INT);
 
     }
 
