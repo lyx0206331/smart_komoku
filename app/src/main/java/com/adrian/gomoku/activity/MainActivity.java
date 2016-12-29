@@ -57,6 +57,11 @@ public class MainActivity extends BaseActivity implements GomokuView.IGameOverLi
         }
 
         mGomokuView.setAiOpened(true);
+        if (mGomokuView.isAiOpened()) {
+            mRevokeBtn.setVisibility(View.GONE);
+        } else {
+            mRevokeBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
