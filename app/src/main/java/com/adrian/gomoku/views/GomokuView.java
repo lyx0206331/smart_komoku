@@ -53,6 +53,8 @@ public class GomokuView extends View {
     private IGameOverListener listener;
     private GomokuAI gomokuAI;
 
+    private boolean isAiOpened = false;
+
     public GomokuView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
@@ -120,19 +122,30 @@ public class GomokuView extends View {
                 return false;
             }
 
-            if (mIsWhite) {
-                mWhiteArray.add(p);
-//                if (gomokuAI.isAiWin(p)) {
-//                    listener.gameOver(true);
-//                }
-            } else {
+            if (isAiOpened) {
                 mBlackArray.add(p);
-//                if (gomokuAI.isPlayerWin(p)) {
-//                    listener.gameOver(false);
-//                }
+                if (gomokuAI.isPlayerWin(p)) {
+                    invalidate();
+                    mIsGameOver = true;
+                    listener.gameOver(false);
+                } else {
+                    Point aiPoint = gomokuAI.getBestPoint(mWhiteArray, mBlackArray);
+                    mWhiteArray.add(aiPoint);
+                    invalidate();
+                    if (gomokuAI.isAiWin(aiPoint)) {
+                        mIsGameOver = true;
+                        listener.gameOver(true);
+                    }
+                }
+            } else {
+                if (mIsWhite) {
+                    mWhiteArray.add(p);
+                } else {
+                    mBlackArray.add(p);
+                }
+                invalidate();
+                mIsWhite = !mIsWhite;
             }
-            invalidate();
-            mIsWhite = !mIsWhite;
         }
 
         return true;
@@ -150,7 +163,9 @@ public class GomokuView extends View {
 
         drawPieces(canvas);
 
-        checkGameOver();
+        if (!isAiOpened) {
+            checkGameOver();
+        }
     }
 
     private void checkGameOver() {
@@ -336,6 +351,7 @@ public class GomokuView extends View {
         mIsGameOver = false;
         mIsWhiteWinner = false;
         mIsWhite = false;
+        gomokuAI.restart();
         invalidate();
     }
 
@@ -352,6 +368,19 @@ public class GomokuView extends View {
             invalidate();
             mIsWhite = !mIsWhite;
         }
+    }
+
+    /**
+     * 开关AI模式
+     *
+     * @param openAI
+     */
+    public void setAiOpened(boolean openAI) {
+        this.isAiOpened = openAI;
+    }
+
+    public boolean isAiOpened() {
+        return isAiOpened;
     }
 
     @Override

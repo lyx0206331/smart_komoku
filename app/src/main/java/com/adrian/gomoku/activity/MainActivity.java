@@ -55,6 +55,8 @@ public class MainActivity extends BaseActivity implements GomokuView.IGameOverLi
         if (cl.isFirstRun()) {
             cl.getLogDialog().show();
         }
+
+        mGomokuView.setAiOpened(true);
     }
 
     @Override

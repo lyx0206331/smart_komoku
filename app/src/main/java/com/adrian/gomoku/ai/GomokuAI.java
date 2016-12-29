@@ -20,18 +20,11 @@ public class GomokuAI {
     private int[] aiWin;
     private int winCount = 572; //胜的可能种数
 
-    private int[][] playerScore;
-    private int[][] aiScore;
-    private int maxScore;
-    private int u, v;
-
     public GomokuAI(int maxLineCount) {
         this.maxLineCount = maxLineCount;
         wins = new boolean[maxLineCount][maxLineCount][winCount];
         playerWin = new int[winCount];
         aiWin = new int[winCount];
-        playerScore = new int[maxLineCount][maxLineCount];
-        aiScore = new int[maxLineCount][maxLineCount];
         initCount();
     }
 
@@ -78,6 +71,11 @@ public class GomokuAI {
         Log.e(TAG, "win count:" + count);
     }
 
+    public void restart() {
+        playerWin = new int[winCount];
+        aiWin = new int[winCount];
+    }
+
     /**
      * 是否玩家胜
      *
@@ -115,7 +113,18 @@ public class GomokuAI {
         return false;
     }
 
+    /**
+     * 获取最优落点
+     *
+     * @param whiteArray
+     * @param blackArray
+     * @return
+     */
     public Point getBestPoint(ArrayList whiteArray, ArrayList blackArray) {
+        int[][] playerScore = new int[maxLineCount][maxLineCount];
+        int[][] aiScore = new int[maxLineCount][maxLineCount];
+        int maxScore = 0;
+        int u = 0, v = 0;
         for (int i = 0; i < maxLineCount; i++) {
             for (int j = 0; j < maxLineCount; j++) {
                 Point p = new Point(i, j);
@@ -138,12 +147,41 @@ public class GomokuAI {
                                 aiScore[i][j] += 220;
                             } else if (aiWin[k] == 2) {
                                 aiScore[i][j] += 420;
+                            } else if (aiWin[k] == 3) {
+                                aiScore[i][j] += 3000;
+                            } else if (aiWin[k] == 4) {
+                                aiScore[i][j] += 20000;
                             }
                         }
                     }
                 }
             }
         }
-        return null;
+        for (int i = 0; i < maxLineCount; i++) {
+            for (int j = 0; j < maxLineCount; j++) {
+                if (playerScore[i][j] > maxScore) {
+                    maxScore = playerScore[i][j];
+                    u = i;
+                    v = j;
+                } else if (playerScore[i][j] == maxScore) {
+                    if (aiScore[i][j] > aiScore[u][v]) {
+                        u = i;
+                        v = j;
+                    }
+                }
+                if (aiScore[i][j] > maxScore) {
+                    maxScore = aiScore[i][j];
+                    u = i;
+                    v = j;
+                } else if (aiScore[i][j] == maxScore) {
+                    if (playerScore[i][j] > playerScore[u][v]) {
+                        u = i;
+                        v = j;
+                    }
+                }
+            }
+        }
+        Point bestPoint = new Point(u, v);
+        return bestPoint;
     }
 }

@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/smart_komoku.iml" filepath="$PROJECT_DIR$/smart_komoku.iml" />
+      <module fileurl="file://$PROJECT_DIR$/komoku.iml" filepath="$PROJECT_DIR$/komoku.iml" />
     </modules>
   </component>
 </project>
