@@ -19,7 +19,10 @@
         <meta-data
             android:value="${UMENG_CHANNEL_VALUE}"
             android:name="UMENG_CHANNEL" />
-        <activity android:name=".activity.MainActivity">
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -31,6 +33,8 @@ public class GomokuView extends View {
     private static final String INSTANCE_WHITE_ARRAY = "instance_white_array";
     private static final String INSTANCE_BLACH_ARRAY = "instance_black_array";
 
+    private static final int AI_TURN = 0;
+
     private int mPanelWidth;
     private float mLineHeight;
     private int MAX_LINE = 15;
@@ -54,6 +58,25 @@ public class GomokuView extends View {
     private GomokuAI gomokuAI;
 
     private boolean isAiOpened = false;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case AI_TURN:
+                    Point aiPoint = gomokuAI.getBestPoint(mWhiteArray, mBlackArray);
+                    mWhiteArray.add(aiPoint);
+                    invalidate();
+                    if (gomokuAI.isAiWin(aiPoint)) {
+                        mIsGameOver = true;
+                        if (listener != null) listener.gameOver(true);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     public GomokuView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -125,17 +148,11 @@ public class GomokuView extends View {
             if (isAiOpened) {
                 mBlackArray.add(p);
                 if (gomokuAI.isPlayerWin(p)) {
-                    invalidate();
+//                    invalidate();
                     mIsGameOver = true;
-                    listener.gameOver(false);
+                    if (listener != null) listener.gameOver(false);
                 } else {
-                    Point aiPoint = gomokuAI.getBestPoint(mWhiteArray, mBlackArray);
-                    mWhiteArray.add(aiPoint);
-                    invalidate();
-                    if (gomokuAI.isAiWin(aiPoint)) {
-                        mIsGameOver = true;
-                        listener.gameOver(true);
-                    }
+                    handler.sendEmptyMessageDelayed(AI_TURN, 500);
                 }
             } else {
                 if (mIsWhite) {
@@ -143,9 +160,10 @@ public class GomokuView extends View {
                 } else {
                     mBlackArray.add(p);
                 }
-                invalidate();
+//                invalidate();
                 mIsWhite = !mIsWhite;
             }
+            invalidate();
         }
 
         return true;
