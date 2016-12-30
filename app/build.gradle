@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.adrian.gomoku"
-        minSdkVersion 9
+        minSdkVersion 11
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -96,4 +96,6 @@ dependencies {
 
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'de.cketti.library.changelog:ckchangelog:1.2.2'
+
+    compile 'com.yalantis:contextmenu:1.0.7'
 }
