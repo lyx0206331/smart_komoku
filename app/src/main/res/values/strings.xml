@@ -10,10 +10,8 @@
     <string name="black_win">黑棋胜，白棋负</string>
 
     <string name="theme_settings">主题设置</string>
+    <string name="mode_choose">模式选择</string>
     <string name="other_settings">其它设置</string>
     <string name="about">关于</string>
-
-    <string name="text">Squid blog crucifix Marfa, consectetur vero placeat mixtape. Non seitan sriracha eu, do Banksy fashion axe cred qui vegan delectus consequat Helvetica mollit. XOXO gluten-free disrupt, gastropub officia cliche chillwave hella pop-up. Fixie swag raw denim, YOLO craft beer assumenda occupy veniam photo booth pug consectetur next level Portland tote bag +1. Mlkshk PBR aliquip placeat Wes Anderson.</string>
-    <string name="title">My Description</string>
     <string name="context_menu">Context menu</string>
 </resources>

@@ -90,32 +90,28 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
         List<MenuObject> menuObjects = new ArrayList<>();
 
         MenuObject close = new MenuObject();
-        close.setResource(R.drawable.icn_close);
+        close.setResource(R.mipmap.icn_close);
 
-        MenuObject send = new MenuObject(getString(R.string.theme_settings));
-        send.setResource(R.mipmap.theme);
+        MenuObject theme = new MenuObject(getString(R.string.theme_settings));
+        theme.setResource(R.mipmap.theme);
 
-        MenuObject like = new MenuObject("Like profile");
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.icn_2);
-        like.setBitmap(b);
+        MenuObject mode = new MenuObject(getString(R.string.mode_choose));
+        Bitmap b = BitmapFactory.decodeResource(getResources(), R.mipmap.mode);
+        mode.setBitmap(b);
 
-        MenuObject addFr = new MenuObject("Add to friends");
+        MenuObject other = new MenuObject(getString(R.string.other_settings));
         BitmapDrawable bd = new BitmapDrawable(getResources(),
-                BitmapFactory.decodeResource(getResources(), R.drawable.icn_3));
-        addFr.setDrawable(bd);
+                BitmapFactory.decodeResource(getResources(), R.mipmap.settings));
+        other.setDrawable(bd);
 
-        MenuObject addFav = new MenuObject("Add to favorites");
-        addFav.setResource(R.drawable.icn_4);
-
-        MenuObject block = new MenuObject("Block user");
-        block.setResource(R.drawable.icn_5);
+        MenuObject about = new MenuObject(getString(R.string.about));
+        about.setResource(R.mipmap.about);
 
         menuObjects.add(close);
-        menuObjects.add(send);
-        menuObjects.add(like);
-        menuObjects.add(addFr);
-        menuObjects.add(addFav);
-        menuObjects.add(block);
+        menuObjects.add(theme);
+        menuObjects.add(mode);
+        menuObjects.add(other);
+        menuObjects.add(about);
         return menuObjects;
     }
 
@@ -128,7 +124,7 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-        mToolbar.setNavigationIcon(R.drawable.btn_back);
+        mToolbar.setNavigationIcon(R.mipmap.btn_back);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
