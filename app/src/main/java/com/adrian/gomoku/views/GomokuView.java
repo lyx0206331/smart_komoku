@@ -41,6 +41,7 @@ public class GomokuView extends View {
     private int MAX_COUNT_IN_LINE = 5;
 
     private Paint mPaint = new Paint();
+    private int boardColor = 0x88000000;
 
     private Bitmap mWhitePiece;
     private Bitmap mBlackPiece;
@@ -84,7 +85,7 @@ public class GomokuView extends View {
     }
 
     private void init() {
-        mPaint.setColor(0x88000000);
+        mPaint.setColor(boardColor);
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);
         mPaint.setStyle(Paint.Style.STROKE);
@@ -399,6 +400,16 @@ public class GomokuView extends View {
 
     public boolean isAiOpened() {
         return isAiOpened;
+    }
+
+    public int getBoardColor() {
+        return boardColor;
+    }
+
+    public void setBoardColor(int boardColor) {
+        this.boardColor = boardColor;
+        mPaint.setColor(boardColor);
+//        invalidate();
     }
 
     @Override

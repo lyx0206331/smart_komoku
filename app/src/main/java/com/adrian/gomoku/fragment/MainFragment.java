@@ -1,4 +1,4 @@
-package com.adrian.gomoku.activity;
+package com.adrian.gomoku.fragment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.views.GomokuView;
@@ -17,17 +18,16 @@ import de.cketti.library.changelog.ChangeLog;
 
 public class MainFragment extends Fragment implements GomokuView.IGameOverListener, View.OnClickListener {
 
+    private LinearLayout mParentLL;
     private GomokuView mGomokuView;
     private AlertDialog mAlertDialog;
     private Button mRevokeBtn;
     private Button mRestartBtn;
 
-    private long mLastBackPress;
-    private static final long mBackPressThreshold = 3500;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        mParentLL = (LinearLayout) rootView.findViewById(R.id.fragment_main);
         mGomokuView = (GomokuView) rootView.findViewById(R.id.gomoku_view);
         mRevokeBtn = (Button) rootView.findViewById(R.id.btn_revoke);
         mRestartBtn = (Button) rootView.findViewById(R.id.btn_restart);
@@ -47,6 +47,18 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
             mRevokeBtn.setVisibility(View.VISIBLE);
         }
         return rootView;
+    }
+
+    public void setBackgroundRes(int resId) {
+        mParentLL.setBackgroundResource(resId);
+    }
+
+    public void setBackgroundColor(int color) {
+        mParentLL.setBackgroundColor(color);
+    }
+
+    public void setBoardColor(int color) {
+        mGomokuView.setBoardColor(color);
     }
 
     @Override

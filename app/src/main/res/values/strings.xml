@@ -11,7 +11,14 @@
 
     <string name="theme_settings">主题设置</string>
     <string name="mode_choose">模式选择</string>
+    <string name="mode">模式</string>
+    <string name="theme">主题</string>
+    <string name="other">其它</string>
     <string name="other_settings">其它设置</string>
     <string name="about">关于</string>
     <string name="context_menu">Context menu</string>
+    <string name="confirm">确定</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
