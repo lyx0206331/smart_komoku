@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.fragment.MainFragment;
+import com.adrian.gomoku.tools.ParamUtil;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.MenuParams;
@@ -200,10 +201,11 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
 //        super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
             case RES_THEME:
-                mainFragment.setBackgroundRes(R.drawable.bg_0);
-                mainFragment.setBoardColor(0xff00ffff);
+                mainFragment.setBackgroundResId(data.getIntExtra(MainFragment.BG_RES_ID, R.drawable.bg_4));
+                mainFragment.setBoardColor(data.getIntExtra(MainFragment.BOARD_COLOR, mainFragment.getBoardColor()));
                 break;
             case RES_MODE:
+                mainFragment.setSinglePlayer(ParamUtil.getInstance().isSinglePlayer());
                 break;
             case RES_OTHER:
                 break;

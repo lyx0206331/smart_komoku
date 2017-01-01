@@ -1,7 +1,9 @@
 package com.adrian.gomoku.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -9,6 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.adrian.gomoku.R;
+import com.adrian.gomoku.fragment.MainFragment;
+import com.adrian.gomoku.tools.ParamUtil;
+import com.adrian.gomoku.views.MultipleRadioGroup;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.OpacityBar;
 import com.larswerkman.holocolorpicker.SVBar;
@@ -21,12 +26,16 @@ import static com.adrian.gomoku.R.id.valuebar;
 public class ThemeActivity extends BaseActivity implements ColorPicker.OnColorChangedListener {
 
     private Button mConfirmBtn;
+    private MultipleRadioGroup mBgImgMRG;
 
     private ColorPicker picker;
     private SVBar svBar;
     private OpacityBar opacityBar;
     private SaturationBar saturationBar;
     private ValueBar valueBar;
+
+    private int boardColor;
+    private int bgResId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +44,8 @@ public class ThemeActivity extends BaseActivity implements ColorPicker.OnColorCh
 
     @Override
     protected void initVariables() {
-
+        boardColor = ParamUtil.getInstance().getBoardColor();
+        bgResId = ParamUtil.getInstance().getBgResId();
     }
 
     @Override
@@ -46,8 +56,43 @@ public class ThemeActivity extends BaseActivity implements ColorPicker.OnColorCh
         mConfirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setResult(MainActivity.RES_THEME);
+                ParamUtil.getInstance().setBoardColor(boardColor);
+                ParamUtil.getInstance().setBgResId(bgResId);
+
+                Intent intent = new Intent();
+                intent.putExtra(MainFragment.BG_RES_ID, bgResId);
+                intent.putExtra(MainFragment.BOARD_COLOR, boardColor);
+                setResult(MainActivity.RES_THEME, intent);
                 finish();
+            }
+        });
+        mBgImgMRG = (MultipleRadioGroup) findViewById(R.id.mrg_bg);
+        mBgImgMRG.setOnCheckedChangeListener(new MultipleRadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(MultipleRadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_bg_0:
+                        bgResId = R.drawable.bg_0;
+                        break;
+                    case R.id.rb_bg_1:
+                        bgResId = R.drawable.bg_1;
+                        break;
+                    case R.id.rb_bg_2:
+                        bgResId = R.drawable.bg_2;
+                        break;
+                    case R.id.rb_bg_3:
+                        bgResId = R.drawable.bg_3;
+                        break;
+                    case R.id.rb_bg_4:
+                        bgResId = R.drawable.bg_4;
+                        break;
+                    case R.id.rb_bg_5:
+                        bgResId = R.drawable.bg_5;
+                        break;
+                    default:
+                        bgResId = R.drawable.bg_4;
+                        break;
+                }
             }
         });
 
@@ -62,19 +107,14 @@ public class ThemeActivity extends BaseActivity implements ColorPicker.OnColorCh
         picker.addSaturationBar(saturationBar);
         picker.addValueBar(valueBar);
 
-//To get the color
-        picker.getColor();
-
-//To set the old selected color u can do it like this
-        picker.setOldCenterColor(picker.getColor());
-// adds listener to the colorpicker which is implemented
-//in the activity
+        picker.setShowOldCenterColor(true);
+        picker.setOldCenterColor(boardColor);
         picker.setOnColorChangedListener(this);
+        picker.setColor(boardColor);
+        picker.changeOpacityBarColor(boardColor);
+        picker.changeSaturationBarColor(boardColor);
+        picker.changeValueBarColor(boardColor);
 
-//to turn of showing the old color
-        picker.setShowOldCenterColor(false);
-
-//adding onChangeListeners to bars
         opacityBar.setOnOpacityChangedListener(new OpacityBar.OnOpacityChangedListener() {
             @Override
             public void onOpacityChanged(int opacity) {
@@ -128,6 +168,7 @@ public class ThemeActivity extends BaseActivity implements ColorPicker.OnColorCh
 
     @Override
     public void onColorChanged(int color) {
-
+//        Log.e("THEME_TAG", "color : " + color);
+        boardColor = color;
     }
 }
