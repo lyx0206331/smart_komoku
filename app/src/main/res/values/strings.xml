@@ -19,7 +19,7 @@
     <string name="context_menu">Context menu</string>
     <string name="confirm">确定</string>
 
-    <string name="bg_color">背景选择</string>
+    <string name="bg_choose">背景选择</string>
     <string name="board_color">棋盘颜色</string>
 
     <string name="bg_music">背景音乐</string>

@@ -28,10 +28,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.ThemeActivity" />
-        <activity android:name=".activity.ModeActivity" />
-        <activity android:name=".activity.OtherActivity"></activity>
+        <activity
+            android:name=".activity.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ThemeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ModeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.OtherActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

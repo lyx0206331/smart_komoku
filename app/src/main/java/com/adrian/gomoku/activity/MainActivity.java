@@ -200,7 +200,7 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
 //        super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
             case RES_THEME:
-                mainFragment.setBackgroundRes(R.drawable.bg_1);
+                mainFragment.setBackgroundRes(R.drawable.bg_0);
                 mainFragment.setBoardColor(0xff00ffff);
                 break;
             case RES_MODE:
