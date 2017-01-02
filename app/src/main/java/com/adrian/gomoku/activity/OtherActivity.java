@@ -9,8 +9,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.adrian.gomoku.R;
+import com.adrian.gomoku.tools.ParamUtil;
+import com.adrian.gomoku.views.SwitchButton;
 
 public class OtherActivity extends BaseActivity {
+
+    private SwitchButton mBgMusicSB;
+    private SwitchButton mPieceSoundSB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,23 @@ public class OtherActivity extends BaseActivity {
     @Override
     protected void initViews() {
         setContentView(R.layout.activity_other);
+        mBgMusicSB = (SwitchButton) findViewById(R.id.sb_bg_music);
+        mBgMusicSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                ParamUtil.getInstance().setOpenBgMusic(isChecked);
+            }
+        });
+        mPieceSoundSB = (SwitchButton) findViewById(R.id.sb_piece_sound);
+        mPieceSoundSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                ParamUtil.getInstance().setOpenedPieceSound(isChecked);
+            }
+        });
         initToolbar();
+        mBgMusicSB.setChecked(ParamUtil.getInstance().openedBgMusic());
+        mPieceSoundSB.setChecked(ParamUtil.getInstance().openedPieceSound());
     }
 
     @Override

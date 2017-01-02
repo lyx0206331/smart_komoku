@@ -25,10 +25,6 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
     private Button mRevokeBtn;
     private Button mRestartBtn;
 
-    public static final String BOARD_COLOR = "boardColor";
-    public static final String BG_RES_ID = "bgResId";
-    public static final String SINGLE_PLAYER = "singlePlayer";
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
@@ -36,6 +32,8 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
         mGomokuView = (GomokuView) rootView.findViewById(R.id.gomoku_view);
         mRevokeBtn = (Button) rootView.findViewById(R.id.btn_revoke);
         mRestartBtn = (Button) rootView.findViewById(R.id.btn_restart);
+        mGomokuView.setPieceSoundResId(R.raw.piece);
+        mGomokuView.setSoundOpened(ParamUtil.getInstance().openedPieceSound());
         mGomokuView.setListener(this);
         mRevokeBtn.setOnClickListener(this);
         mRestartBtn.setOnClickListener(this);
@@ -45,17 +43,19 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
             cl.getLogDialog().show();
         }
 
-//        mGomokuView.setAiOpened(true);
-//        if (mGomokuView.isAiOpened()) {
-//            mRevokeBtn.setVisibility(View.GONE);
-//        } else {
-//            mRevokeBtn.setVisibility(View.VISIBLE);
-//        }
         setSinglePlayer(ParamUtil.getInstance().isSinglePlayer());
 
         setBackgroundResId(ParamUtil.getInstance().getBgResId());
         setBoardColor(ParamUtil.getInstance().getBoardColor());
         return rootView;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (getUserVisibleHint()) {
+            mGomokuView.setSoundOpened(ParamUtil.getInstance().openedPieceSound());
+        }
     }
 
     public void setSinglePlayer(boolean isSingle) {

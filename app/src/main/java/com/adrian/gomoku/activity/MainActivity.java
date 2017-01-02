@@ -201,8 +201,8 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
 //        super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
             case RES_THEME:
-                mainFragment.setBackgroundResId(data.getIntExtra(MainFragment.BG_RES_ID, R.drawable.bg_4));
-                mainFragment.setBoardColor(data.getIntExtra(MainFragment.BOARD_COLOR, mainFragment.getBoardColor()));
+                mainFragment.setBackgroundResId(data.getIntExtra(ParamUtil.BG_RES_ID, R.drawable.bg_4));
+                mainFragment.setBoardColor(data.getIntExtra(ParamUtil.BOARD_COLOR, mainFragment.getBoardColor()));
                 break;
             case RES_MODE:
                 mainFragment.setSinglePlayer(ParamUtil.getInstance().isSinglePlayer());

@@ -26,7 +26,7 @@
     <string name="double_player">双人一机</string>
 
     <string name="bg_music">背景音乐</string>
-    <string name="piece_sound">落子声音</string>
+    <string name="piece_sound">落子音效</string>
 
     <string name="rule_desc">规则说明:\n&#160;&#160;&#160;&#160;本游戏只为休闲娱乐之用，无禁手等严格规则，玩家可随意落子，只要在横向、竖向、斜向或者反斜向先行成连珠五子即为获胜！</string>
 

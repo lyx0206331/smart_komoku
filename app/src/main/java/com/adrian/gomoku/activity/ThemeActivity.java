@@ -60,8 +60,8 @@ public class ThemeActivity extends BaseActivity implements ColorPicker.OnColorCh
                 ParamUtil.getInstance().setBgResId(bgResId);
 
                 Intent intent = new Intent();
-                intent.putExtra(MainFragment.BG_RES_ID, bgResId);
-                intent.putExtra(MainFragment.BOARD_COLOR, boardColor);
+                intent.putExtra(ParamUtil.BG_RES_ID, bgResId);
+                intent.putExtra(ParamUtil.BOARD_COLOR, boardColor);
                 setResult(MainActivity.RES_THEME, intent);
                 finish();
             }

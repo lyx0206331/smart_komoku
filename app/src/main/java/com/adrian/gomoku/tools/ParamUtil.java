@@ -16,6 +16,12 @@ public class ParamUtil {
 
     private static ParamUtil instance;
 
+    public static final String BOARD_COLOR = "boardColor";
+    public static final String BG_RES_ID = "bgResId";
+    public static final String SINGLE_PLAYER = "singlePlayer";
+    public static final String OPENED_PIECE = "openedPieceSound";
+    public static final String OPENED_BG_MUSIC = "openedBgMusic";
+
     public static ParamUtil getInstance() {
         if (instance == null) {
             instance = new ParamUtil();
@@ -28,39 +34,108 @@ public class ParamUtil {
         return pref;
     }
 
+    /**
+     * 设置背景资源ID
+     *
+     * @param resId
+     */
     public void setBgResId(int resId) {
         SharedPreferences pref = getPref();
         SharedPreferences.Editor editor = pref.edit();
-        editor.putInt(MainFragment.BG_RES_ID, resId);
+        editor.putInt(BG_RES_ID, resId);
         editor.commit();
     }
 
+    /**
+     * 获取背景资源ID
+     * @return
+     */
     public int getBgResId() {
         SharedPreferences pref = getPref();
-        return pref.getInt(MainFragment.BG_RES_ID, R.drawable.bg_4);
+        return pref.getInt(BG_RES_ID, R.drawable.bg_4);
     }
 
+    /**
+     * 设置棋盘颜色
+     * @param color
+     */
     public void setBoardColor(int color) {
         SharedPreferences pref = getPref();
         SharedPreferences.Editor editor = pref.edit();
-        editor.putInt(MainFragment.BOARD_COLOR, color);
+        editor.putInt(BOARD_COLOR, color);
         editor.commit();
     }
 
+    /**
+     * 获取棋盘颜色
+     * @return
+     */
     public int getBoardColor() {
         SharedPreferences pref = getPref();
-        return pref.getInt(MainFragment.BOARD_COLOR, 0x88000000);
+        return pref.getInt(BOARD_COLOR, 0x88000000);
     }
 
+    /**
+     * 设置是否单人模式
+     * @param isSingle
+     */
     public void setSinglePlayer(boolean isSingle) {
         SharedPreferences pref = getPref();
         SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean(MainFragment.SINGLE_PLAYER, isSingle);
+        editor.putBoolean(SINGLE_PLAYER, isSingle);
         editor.commit();
     }
 
+    /**
+     * 获取是否单人模式
+     * @return
+     */
     public boolean isSinglePlayer() {
         SharedPreferences pref = getPref();
-        return pref.getBoolean(MainFragment.SINGLE_PLAYER, true);
+        return pref.getBoolean(SINGLE_PLAYER, true);
+    }
+
+    /**
+     * 设置是否打开落子声音
+     *
+     * @param has
+     */
+    public void setOpenedPieceSound(boolean has) {
+        SharedPreferences pref = getPref();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean(OPENED_PIECE, has);
+        editor.commit();
+    }
+
+    /**
+     * 判断是否已打开落子声音
+     *
+     * @return
+     */
+    public boolean openedPieceSound() {
+        SharedPreferences pref = getPref();
+        return pref.getBoolean(OPENED_PIECE, true);
+    }
+
+    /**
+     * 设置是否打开背景音乐
+     *
+     * @param opened
+     */
+    public void setOpenBgMusic(boolean opened) {
+        SharedPreferences pref = getPref();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean(OPENED_BG_MUSIC, opened);
+        editor.commit();
+    }
+
+    /**
+     * 判断是否已打开背景音乐
+     *
+     * @return
+     */
+    public boolean openedBgMusic() {
+        SharedPreferences pref = getPref();
+        return pref.getBoolean(OPENED_BG_MUSIC, true);
     }
 }
