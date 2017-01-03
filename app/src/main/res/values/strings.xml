@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">五子棋</string>
+    <string name="app_name">休闲五子棋</string>
 
     <string name="backward">悔&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;棋</string>
     <string name="start_new">重新开局</string>
@@ -11,7 +11,25 @@
 
     <string name="theme_settings">主题设置</string>
     <string name="mode_choose">模式选择</string>
+    <string name="mode">模式</string>
+    <string name="theme">主题</string>
+    <string name="other">其它</string>
     <string name="other_settings">其它设置</string>
     <string name="about">关于</string>
     <string name="context_menu">Context menu</string>
+    <string name="confirm">确定</string>
+
+    <string name="bg_choose">背景选择</string>
+    <string name="board_color">棋盘颜色</string>
+
+    <string name="single_player">人机对战</string>
+    <string name="double_player">双人一机</string>
+
+    <string name="bg_music">背景音乐</string>
+    <string name="piece_sound">落子音效</string>
+
+    <string name="rule_desc">规则说明:\n&#160;&#160;&#160;&#160;本游戏只为休闲娱乐之用，无禁手等严格规则，玩家可随意落子，只要在横向、竖向、斜向或者反斜向先行成连珠五子即为获胜！</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_theme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.adrian.gomoku.activity.ThemeActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/base_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:text="@string/bg_choose"
+                android:textColor="@color/font_gray"
+                android:textSize="@dimen/tool_bar_text_size" />
+
+            <com.adrian.gomoku.views.MultipleRadioGroup
+                android:id="@+id/mrg_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_bg_0"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/bg_0_thumb"
+                        android:button="@drawable/bg_selector"
+                        android:gravity="center" />
+
+                    <RadioButton
+                        android:id="@+id/rb_bg_1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.0"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/bg_1_thumb"
+                        android:button="@drawable/bg_selector"
+                        android:gravity="center" />
+
+                    <RadioButton
+                        android:id="@+id/rb_bg_2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/bg_2_thumb"
+                        android:button="@drawable/bg_selector"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_bg_3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/bg_3_thumb"
+                        android:button="@drawable/bg_selector"
+                        android:gravity="center" />
+
+                    <RadioButton
+                        android:id="@+id/rb_bg_4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.0"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/bg_4_thumb"
+                        android:button="@drawable/bg_selector"
+                        android:gravity="center" />
+
+                    <RadioButton
+                        android:id="@+id/rb_bg_5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.0"
+                        android:background="@drawable/bg_5_thumb"
+                        android:button="@drawable/bg_selector"
+                        android:gravity="center" />
+                </LinearLayout>
+            </com.adrian.gomoku.views.MultipleRadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/board_color"
+                android:textColor="@color/font_gray"
+                android:textSize="@dimen/tool_bar_text_size" />
+
+            <com.larswerkman.holocolorpicker.ColorPicker
+                android:id="@+id/picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal" />
+
+            <com.larswerkman.holocolorpicker.SVBar
+                android:id="@+id/svbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.larswerkman.holocolorpicker.OpacityBar
+                android:id="@+id/opacitybar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.larswerkman.holocolorpicker.SaturationBar
+                android:id="@+id/saturationbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.larswerkman.holocolorpicker.ValueBar
+                android:id="@+id/valuebar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin2"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:background="@color/base_blue"
+                android:text="@string/confirm"
+                android:textSize="@dimen/tool_bar_text_size" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

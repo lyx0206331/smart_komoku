@@ -1,4 +1,4 @@
-package com.adrian.gomoku.activity;
+package com.adrian.gomoku.fragment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.adrian.gomoku.R;
+import com.adrian.gomoku.tools.ParamUtil;
 import com.adrian.gomoku.views.GomokuView;
 
 import de.cketti.library.changelog.ChangeLog;
@@ -17,20 +19,21 @@ import de.cketti.library.changelog.ChangeLog;
 
 public class MainFragment extends Fragment implements GomokuView.IGameOverListener, View.OnClickListener {
 
+    private LinearLayout mParentLL;
     private GomokuView mGomokuView;
     private AlertDialog mAlertDialog;
     private Button mRevokeBtn;
     private Button mRestartBtn;
 
-    private long mLastBackPress;
-    private static final long mBackPressThreshold = 3500;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        mParentLL = (LinearLayout) rootView.findViewById(R.id.fragment_main);
         mGomokuView = (GomokuView) rootView.findViewById(R.id.gomoku_view);
         mRevokeBtn = (Button) rootView.findViewById(R.id.btn_revoke);
         mRestartBtn = (Button) rootView.findViewById(R.id.btn_restart);
+        mGomokuView.setPieceSoundResId(R.raw.piece);
+        mGomokuView.setSoundOpened(ParamUtil.getInstance().openedPieceSound());
         mGomokuView.setListener(this);
         mRevokeBtn.setOnClickListener(this);
         mRestartBtn.setOnClickListener(this);
@@ -40,13 +43,51 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
             cl.getLogDialog().show();
         }
 
-        mGomokuView.setAiOpened(true);
-        if (mGomokuView.isAiOpened()) {
-            mRevokeBtn.setVisibility(View.GONE);
-        } else {
-            mRevokeBtn.setVisibility(View.VISIBLE);
-        }
+        setSinglePlayer(ParamUtil.getInstance().isSinglePlayer());
+
+        setBackgroundResId(ParamUtil.getInstance().getBgResId());
+        setBoardColor(ParamUtil.getInstance().getBoardColor());
         return rootView;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (getUserVisibleHint()) {
+            mGomokuView.setSoundOpened(ParamUtil.getInstance().openedPieceSound());
+        }
+    }
+
+    public void setSinglePlayer(boolean isSingle) {
+        if (isSingle && !mGomokuView.isAiOpened()) {
+            mRevokeBtn.setVisibility(View.GONE);
+            mGomokuView.setAiOpened(true);
+            mGomokuView.start();
+        } else if (!isSingle && mGomokuView.isAiOpened()) {
+            mRevokeBtn.setVisibility(View.VISIBLE);
+            mGomokuView.setAiOpened(false);
+            mGomokuView.start();
+        }
+    }
+
+    public void setBackgroundResId(int resId) {
+        mParentLL.setBackgroundResource(resId);
+    }
+
+    public int getBackgroundResId() {
+        return ParamUtil.getInstance().getBgResId();
+    }
+
+    public void setBackgroundColor(int color) {
+        mParentLL.setBackgroundColor(color);
+    }
+
+    public void setBoardColor(int color) {
+        mGomokuView.setBoardColor(color);
+    }
+
+    public int getBoardColor() {
+        return ParamUtil.getInstance().getBoardColor();
     }
 
     @Override

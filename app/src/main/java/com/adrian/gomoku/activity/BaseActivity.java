@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -24,12 +25,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         loadData();
     }
 
+    protected void startActivityForResult(Class<? extends Activity> dstAct, int reqCode) {
+        Intent intent = new Intent(getApplicationContext(), dstAct);
+        startActivityForResult(intent, reqCode);
+    }
+
+    protected void startActivityForResult(Class<? extends Activity> dstAct, int reqCode, @NonNull Bundle bundle) {
+        Intent intent = new Intent(getApplicationContext(), dstAct);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, reqCode);
+    }
+
     protected void startActivity(Class<? extends Activity> dstAct) {
         Intent intent = new Intent(getApplicationContext(), dstAct);
         startActivity(intent);
     }
 
-    protected void startActivity(Class<? extends Activity> dstAct, Bundle bundle) {
+    protected void startActivity(Class<? extends Activity> dstAct, @NonNull Bundle bundle) {
         Intent intent = new Intent(getApplicationContext(), dstAct);
         intent.putExtras(bundle);
         startActivity(intent);

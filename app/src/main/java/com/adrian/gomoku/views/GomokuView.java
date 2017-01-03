@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,6 +43,7 @@ public class GomokuView extends View {
     private int MAX_COUNT_IN_LINE = 5;
 
     private Paint mPaint = new Paint();
+    private int boardColor = 0x88000000;
 
     private Bitmap mWhitePiece;
     private Bitmap mBlackPiece;
@@ -57,7 +60,12 @@ public class GomokuView extends View {
     private IGameOverListener listener;
     private GomokuAI gomokuAI;
 
+    private SoundPool soundPool;
+    private int pieceSoundResId;
+    private int pieceSoundId;
+
     private boolean isAiOpened = false;
+    private boolean isSoundOpened = true;
 
     private Handler handler = new Handler() {
         @Override
@@ -67,6 +75,7 @@ public class GomokuView extends View {
                     Point aiPoint = gomokuAI.getBestPoint(mWhiteArray, mBlackArray);
                     mWhiteArray.add(aiPoint);
                     invalidate();
+                    playSound();
                     if (gomokuAI.isAiWin(aiPoint)) {
                         mIsGameOver = true;
                         if (listener != null) listener.gameOver(true);
@@ -84,7 +93,7 @@ public class GomokuView extends View {
     }
 
     private void init() {
-        mPaint.setColor(0x88000000);
+        mPaint.setColor(boardColor);
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);
         mPaint.setStyle(Paint.Style.STROKE);
@@ -93,6 +102,34 @@ public class GomokuView extends View {
         mBlackPiece = BitmapFactory.decodeResource(getResources(), R.drawable.piece0);
 
         gomokuAI = new GomokuAI(MAX_LINE);
+        soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 5);
+    }
+
+    public int getPieceSoundResId() {
+        return pieceSoundResId;
+    }
+
+    public void setPieceSoundResId(int pieceSoundResId) {
+        this.pieceSoundResId = pieceSoundResId;
+        pieceSoundId = soundPool.load(getContext(), pieceSoundResId, 1);
+    }
+
+    public boolean isSoundOpened() {
+        return isSoundOpened;
+    }
+
+    public void setSoundOpened(boolean soundOpened) {
+        isSoundOpened = soundOpened;
+    }
+
+    private void playSound() {
+        if (isSoundOpened) {
+            if (pieceSoundResId != 0) {
+                soundPool.play(pieceSoundId, 1.0f, 1.0f, 0, 0, 1);
+            } else {
+                Log.e("GOMOKU_VIEW", "无音频文件!");
+            }
+        }
     }
 
     @Override
@@ -164,6 +201,7 @@ public class GomokuView extends View {
                 mIsWhite = !mIsWhite;
             }
             invalidate();
+            playSound();
         }
 
         return true;
@@ -399,6 +437,16 @@ public class GomokuView extends View {
 
     public boolean isAiOpened() {
         return isAiOpened;
+    }
+
+    public int getBoardColor() {
+        return boardColor;
+    }
+
+    public void setBoardColor(int boardColor) {
+        this.boardColor = boardColor;
+        mPaint.setColor(boardColor);
+//        invalidate();
     }
 
     @Override

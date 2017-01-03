@@ -1,5 +1,6 @@
 package com.adrian.gomoku.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adrian.gomoku.R;
+import com.adrian.gomoku.fragment.MainFragment;
+import com.adrian.gomoku.tools.ParamUtil;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.MenuParams;
@@ -29,8 +32,18 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity implements OnMenuItemClickListener, OnMenuItemLongClickListener {
 
+    private static final int REQ_THEME = 1;
+    private static final int REQ_MODE = 2;
+    private static final int REQ_OTHER = 3;
+    private static final int REQ_ABOUT = 4;
+    public static final int RES_THEME = 0xa0;
+    public static final int RES_MODE = 0xa1;
+    public static final int RES_OTHER = 0xa2;
+    public static final int RES_ABOUT = 0xa3;
+
     private FragmentManager fragmentManager;
     private ContextMenuDialogFragment mMenuDialogFragment;
+    private MainFragment mainFragment;
 
     private long mLastBackPress;
     private static final long mBackPressThreshold = 3500;
@@ -53,7 +66,8 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
         fragmentManager = getSupportFragmentManager();
         initToolbar();
         initMenuFragment();
-        addFragment(new MainFragment(), true, R.id.container);
+        mainFragment = new MainFragment();
+        addFragment(mainFragment, true, R.id.container);
     }
 
     @Override
@@ -183,8 +197,44 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case RES_THEME:
+                mainFragment.setBackgroundResId(data.getIntExtra(ParamUtil.BG_RES_ID, R.drawable.bg_4));
+                mainFragment.setBoardColor(data.getIntExtra(ParamUtil.BOARD_COLOR, mainFragment.getBoardColor()));
+                break;
+            case RES_MODE:
+                mainFragment.setSinglePlayer(ParamUtil.getInstance().isSinglePlayer());
+                break;
+            case RES_OTHER:
+                break;
+            case RES_ABOUT:
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
     public void onMenuItemClick(View clickedView, int position) {
-        Toast.makeText(this, "Clicked on position: " + position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Clicked on position: " + position, Toast.LENGTH_SHORT).show();
+        switch (position) {
+            case 0:
+                break;
+            case REQ_THEME:
+                startActivityForResult(ThemeActivity.class, REQ_THEME);
+                break;
+            case REQ_MODE:
+                startActivityForResult(ModeActivity.class, REQ_MODE);
+                break;
+            case REQ_OTHER:
+                startActivityForResult(OtherActivity.class, REQ_OTHER);
+                break;
+            case REQ_ABOUT:
+                startActivity(AboutActivity.class);
+                break;
+        }
     }
 
     @Override
