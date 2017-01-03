@@ -34,7 +34,7 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
         mRevokeBtn = (Button) rootView.findViewById(R.id.btn_revoke);
         mRestartBtn = (Button) rootView.findViewById(R.id.btn_restart);
         mGomokuView.setPieceSoundResId(R.raw.piece);
-        mGomokuView.setSoundOpened(ParamUtil.getInstance().openedPieceSound());
+//        mGomokuView.setSoundOpened(ParamUtil.getInstance().openedPieceSound());
         mGomokuView.setListener(this);
         mRevokeBtn.setOnClickListener(this);
         mRestartBtn.setOnClickListener(this);
