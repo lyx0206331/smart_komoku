@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +52,9 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            mGomokuView.setSoundOpened(ParamUtil.getInstance().openedPieceSound());
-        }
+    public void onResume() {
+        super.onResume();
+        mGomokuView.setSoundOpened(ParamUtil.getInstance().openedPieceSound());
     }
 
     public void setSinglePlayer(boolean isSingle) {
