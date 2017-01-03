@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.fragment.MainFragment;
+import com.adrian.gomoku.service.BgMusicService;
 import com.adrian.gomoku.tools.ParamUtil;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.MenuObject;
@@ -39,7 +40,6 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
     public static final int RES_THEME = 0xa0;
     public static final int RES_MODE = 0xa1;
     public static final int RES_OTHER = 0xa2;
-    public static final int RES_ABOUT = 0xa3;
 
     private FragmentManager fragmentManager;
     private ContextMenuDialogFragment mMenuDialogFragment;
@@ -72,6 +72,11 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
 
     @Override
     protected void loadData() {
+        if (ParamUtil.getInstance().openedBgMusic()) {
+            Intent intent = new Intent(this, BgMusicService.class);
+            intent.setAction(BgMusicService.ACTION_START_PLAY);
+            startService(intent);
+        }
     }
 
     private void initMenuFragment() {
@@ -197,19 +202,24 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Intent intent = new Intent(this, BgMusicService.class);
+        stopService(intent);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
             case RES_THEME:
-                mainFragment.setBackgroundResId(data.getIntExtra(ParamUtil.BG_RES_ID, R.drawable.bg_4));
-                mainFragment.setBoardColor(data.getIntExtra(ParamUtil.BOARD_COLOR, mainFragment.getBoardColor()));
+                mainFragment.setTheme();
                 break;
             case RES_MODE:
-                mainFragment.setSinglePlayer(ParamUtil.getInstance().isSinglePlayer());
+                mainFragment.setSinglePlayer();
                 break;
             case RES_OTHER:
-                break;
-            case RES_ABOUT:
+                mainFragment.setPieceSound();
                 break;
             default:
                 break;

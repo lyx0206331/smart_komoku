@@ -118,10 +118,18 @@ public class GomokuView extends View {
         return isSoundOpened;
     }
 
+    /**
+     * 设置是否打开落子音效
+     *
+     * @param soundOpened
+     */
     public void setSoundOpened(boolean soundOpened) {
         isSoundOpened = soundOpened;
     }
 
+    /**
+     * 播放落子音效
+     */
     private void playSound() {
         if (isSoundOpened) {
             if (pieceSoundResId != 0) {

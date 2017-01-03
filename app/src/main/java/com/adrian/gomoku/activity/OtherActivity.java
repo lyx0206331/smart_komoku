@@ -1,6 +1,7 @@
 package com.adrian.gomoku.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.adrian.gomoku.R;
+import com.adrian.gomoku.service.BgMusicService;
 import com.adrian.gomoku.tools.ParamUtil;
 import com.adrian.gomoku.views.SwitchButton;
 
@@ -35,6 +37,14 @@ public class OtherActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 ParamUtil.getInstance().setOpenBgMusic(isChecked);
+                if (isChecked) {
+                    Intent intent = new Intent(OtherActivity.this, BgMusicService.class);
+                    intent.setAction(BgMusicService.ACTION_START_PLAY);
+                    startService(intent);
+                } else {
+                    Intent intent = new Intent(OtherActivity.this, BgMusicService.class);
+                    stopService(intent);
+                }
             }
         });
         mPieceSoundSB = (SwitchButton) findViewById(R.id.sb_piece_sound);
@@ -67,12 +77,20 @@ public class OtherActivity extends BaseActivity {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+//                setResult(MainActivity.RES_OTHER);
+//                finish();
+                onBackPressed();
             }
         });
         mToolBarTextView.setText(R.string.other);
     }
 
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        setResult(MainActivity.RES_OTHER);
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {

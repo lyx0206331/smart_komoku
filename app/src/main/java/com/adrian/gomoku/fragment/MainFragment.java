@@ -34,7 +34,6 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
         mRevokeBtn = (Button) rootView.findViewById(R.id.btn_revoke);
         mRestartBtn = (Button) rootView.findViewById(R.id.btn_restart);
         mGomokuView.setPieceSoundResId(R.raw.piece);
-//        mGomokuView.setSoundOpened(ParamUtil.getInstance().openedPieceSound());
         mGomokuView.setListener(this);
         mRevokeBtn.setOnClickListener(this);
         mRestartBtn.setOnClickListener(this);
@@ -44,20 +43,23 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
             cl.getLogDialog().show();
         }
 
-        setSinglePlayer(ParamUtil.getInstance().isSinglePlayer());
-
-        setBackgroundResId(ParamUtil.getInstance().getBgResId());
-        setBoardColor(ParamUtil.getInstance().getBoardColor());
+        setSinglePlayer();
+        setPieceSound();
+        setTheme();
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    public void setTheme() {
+        mParentLL.setBackgroundResource(ParamUtil.getInstance().getBgResId());
+        mGomokuView.setBoardColor(ParamUtil.getInstance().getBoardColor());
+    }
+
+    public void setPieceSound() {
         mGomokuView.setSoundOpened(ParamUtil.getInstance().openedPieceSound());
     }
 
-    public void setSinglePlayer(boolean isSingle) {
+    public void setSinglePlayer() {
+        boolean isSingle = ParamUtil.getInstance().isSinglePlayer();
         if (isSingle && !mGomokuView.isAiOpened()) {
             mRevokeBtn.setVisibility(View.GONE);
             mGomokuView.setAiOpened(true);
@@ -69,20 +71,12 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
         }
     }
 
-    public void setBackgroundResId(int resId) {
-        mParentLL.setBackgroundResource(resId);
-    }
-
     public int getBackgroundResId() {
         return ParamUtil.getInstance().getBgResId();
     }
 
     public void setBackgroundColor(int color) {
         mParentLL.setBackgroundColor(color);
-    }
-
-    public void setBoardColor(int color) {
-        mGomokuView.setBoardColor(color);
     }
 
     public int getBoardColor() {
