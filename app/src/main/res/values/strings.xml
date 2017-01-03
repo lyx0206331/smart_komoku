@@ -24,6 +24,7 @@
 
     <string name="single_player">人机对战</string>
     <string name="double_player">双人一机</string>
+    <string name="mode_tips">模式切换将重新开始棋局，人机对战状态无悔棋功能！</string>
 
     <string name="bg_music">背景音乐</string>
     <string name="piece_sound">落子音效</string>
