@@ -14,6 +14,8 @@ import com.adrian.gomoku.R;
 import com.adrian.gomoku.fragment.MainFragment;
 import com.adrian.gomoku.tools.ParamUtil;
 import com.adrian.gomoku.views.MultipleRadioGroup;
+import com.adrian.gomoku.views.RippleButton;
+import com.adrian.gomoku.views.RippleView;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.OpacityBar;
 import com.larswerkman.holocolorpicker.SVBar;
@@ -25,7 +27,7 @@ import static com.adrian.gomoku.R.id.valuebar;
 
 public class ThemeActivity extends BaseActivity implements ColorPicker.OnColorChangedListener {
 
-    private Button mConfirmBtn;
+    private RippleView mConfirmBtn;
     private MultipleRadioGroup mBgImgMRG;
 
     private ColorPicker picker;
@@ -52,10 +54,10 @@ public class ThemeActivity extends BaseActivity implements ColorPicker.OnColorCh
     protected void initViews() {
         setContentView(R.layout.activity_theme);
         initToolbar();
-        mConfirmBtn = (Button) findViewById(R.id.btn_confirm);
-        mConfirmBtn.setOnClickListener(new View.OnClickListener() {
+        mConfirmBtn = (RippleView) findViewById(R.id.btn_confirm);
+        mConfirmBtn.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
             @Override
-            public void onClick(View v) {
+            public void onComplete(RippleView rippleView) {
                 ParamUtil.getInstance().setBoardColor(boardColor);
                 ParamUtil.getInstance().setBgResId(bgResId);
 

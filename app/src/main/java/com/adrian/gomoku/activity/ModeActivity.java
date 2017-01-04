@@ -12,11 +12,12 @@ import android.widget.TextView;
 
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.tools.ParamUtil;
+import com.adrian.gomoku.views.RippleView;
 
 public class ModeActivity extends BaseActivity {
 
     private RadioGroup mModeRG;
-    private Button mConfirmBtn;
+    private RippleView mConfirmBtn;
 
     private boolean isSingle;
 
@@ -35,7 +36,7 @@ public class ModeActivity extends BaseActivity {
         setContentView(R.layout.activity_mode);
         initToolbar();
         mModeRG = (RadioGroup) findViewById(R.id.rg_mode);
-        mConfirmBtn = (Button) findViewById(R.id.btn_confirm);
+        mConfirmBtn = (RippleView) findViewById(R.id.btn_confirm);
 
         mModeRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -50,9 +51,9 @@ public class ModeActivity extends BaseActivity {
                 }
             }
         });
-        mConfirmBtn.setOnClickListener(new View.OnClickListener() {
+        mConfirmBtn.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
             @Override
-            public void onClick(View v) {
+            public void onComplete(RippleView rippleView) {
                 ParamUtil.getInstance().setSinglePlayer(isSingle);
                 setResult(MainActivity.RES_MODE);
                 finish();

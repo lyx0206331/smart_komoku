@@ -35,7 +35,7 @@ public class BgMusicService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String action = intent.getAction();
-        if (action.equals(ACTION_START_PLAY)) {
+        if (action.equals(ACTION_START_PLAY) && !mediaPlayer.isPlaying()) {
             mediaPlayer.start();
         } else if (action.equals(ACTION_PAUSE_PLAY) && mediaPlayer.isPlaying()) {
             mediaPlayer.pause();

@@ -48,6 +48,8 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
     private long mLastBackPress;
     private static final long mBackPressThreshold = 3500;
 
+    private boolean keepBgMusic = false;    //是否需要保持背景音乐
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +74,10 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
 
     @Override
     protected void loadData() {
+//        startBgMusic();
+    }
+
+    private void startBgMusic() {
         if (ParamUtil.getInstance().openedBgMusic()) {
             Intent intent = new Intent(this, BgMusicService.class);
             intent.setAction(BgMusicService.ACTION_START_PLAY);
@@ -187,6 +193,13 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        keepBgMusic = false;
+        startBgMusic();
+    }
+
+    @Override
     public void onBackPressed() {
         if (mMenuDialogFragment != null && mMenuDialogFragment.isAdded()) {
             mMenuDialogFragment.dismiss();
@@ -198,6 +211,16 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
             } else {
                 finish();
             }
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (!keepBgMusic) {
+            Intent intent = new Intent(this, BgMusicService.class);
+            intent.setAction(BgMusicService.ACTION_PAUSE_PLAY);
+            startService(intent);
         }
     }
 
@@ -233,15 +256,19 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
             case 0:
                 break;
             case REQ_THEME:
+                keepBgMusic = true;
                 startActivityForResult(ThemeActivity.class, REQ_THEME);
                 break;
             case REQ_MODE:
+                keepBgMusic = true;
                 startActivityForResult(ModeActivity.class, REQ_MODE);
                 break;
             case REQ_OTHER:
+                keepBgMusic = true;
                 startActivityForResult(OtherActivity.class, REQ_OTHER);
                 break;
             case REQ_ABOUT:
+                keepBgMusic = true;
                 startActivity(AboutActivity.class);
                 break;
         }

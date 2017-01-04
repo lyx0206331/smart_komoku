@@ -71,18 +71,6 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
         }
     }
 
-    public int getBackgroundResId() {
-        return ParamUtil.getInstance().getBgResId();
-    }
-
-    public void setBackgroundColor(int color) {
-        mParentLL.setBackgroundColor(color);
-    }
-
-    public int getBoardColor() {
-        return ParamUtil.getInstance().getBoardColor();
-    }
-
     @Override
     public void gameOver(boolean isWhiteWin) {
         int msgId = isWhiteWin ? R.string.white_win : R.string.black_win;

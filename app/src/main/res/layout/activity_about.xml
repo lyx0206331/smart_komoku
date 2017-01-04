@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/rule_desc"
-        android:textColor="@color/divider_color" />
+        android:textColor="@color/font_gray"
+        android:textSize="@dimen/normal_font" />
 
 </LinearLayout>

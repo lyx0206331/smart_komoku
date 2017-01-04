@@ -29,7 +29,7 @@
     <string name="bg_music">背景音乐</string>
     <string name="piece_sound">落子音效</string>
 
-    <string name="rule_desc">规则说明:\n&#160;&#160;&#160;&#160;本游戏只为休闲娱乐之用，无禁手等严格规则，玩家可随意落子，只要在横向、竖向、斜向或者反斜向先行成连珠五子即为获胜！</string>
+    <string name="rule_desc">规则说明:\n\t\t\t\t\t&#160;本游戏只为休闲娱乐之用，无禁手等严格规则，玩家可随意落子，只要在横向、竖向、斜向或者反斜向先形成连珠五子即为获胜！</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
