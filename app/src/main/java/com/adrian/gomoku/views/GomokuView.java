@@ -102,7 +102,6 @@ public class GomokuView extends View {
         mBlackPiece = BitmapFactory.decodeResource(getResources(), R.drawable.piece0);
 
         gomokuAI = new GomokuAI(MAX_LINE);
-        soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 5);
     }
 
     public int getPieceSoundResId() {
@@ -111,6 +110,9 @@ public class GomokuView extends View {
 
     public void setPieceSoundResId(int pieceSoundResId) {
         this.pieceSoundResId = pieceSoundResId;
+        if (soundPool == null) {
+            soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 5);
+        }
         pieceSoundId = soundPool.load(getContext(), pieceSoundResId, 1);
     }
 

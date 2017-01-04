@@ -57,7 +57,7 @@ android {
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         // 输出apk名称为五子棋_v1.0_2015-01-15_wandoujia.apk
-                        def fileName = "五子棋_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                        def fileName = "休闲五子棋_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
                         output.outputFile = new File(outputFile.parent, fileName)
                     }
                 }
