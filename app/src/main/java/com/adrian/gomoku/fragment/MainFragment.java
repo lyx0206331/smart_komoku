@@ -4,14 +4,19 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.adrian.gomoku.R;
+import com.adrian.gomoku.tools.CommUtil;
+import com.adrian.gomoku.tools.ImageUtil;
 import com.adrian.gomoku.tools.ParamUtil;
 import com.adrian.gomoku.views.GomokuView;
 
@@ -20,16 +25,20 @@ import de.cketti.library.changelog.ChangeLog;
 
 public class MainFragment extends Fragment implements GomokuView.IGameOverListener, View.OnClickListener {
 
-    private LinearLayout mParentLL;
+    private ImageView mBgIV;
     private GomokuView mGomokuView;
     private AlertDialog mAlertDialog;
     private Button mRevokeBtn;
     private Button mRestartBtn;
 
+    private Display display;
+    private DisplayMetrics dm;
+    private int screenW, screenH;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        mParentLL = (LinearLayout) rootView.findViewById(R.id.fragment_main);
+        mBgIV = (ImageView) rootView.findViewById(R.id.iv_bg);
         mGomokuView = (GomokuView) rootView.findViewById(R.id.gomoku_view);
         mRevokeBtn = (Button) rootView.findViewById(R.id.btn_revoke);
         mRestartBtn = (Button) rootView.findViewById(R.id.btn_restart);
@@ -43,6 +52,10 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
             cl.getLogDialog().show();
         }
 
+        dm = CommUtil.getScreenInfo();
+        screenW = dm.widthPixels;
+        screenH = dm.heightPixels;
+
         setSinglePlayer();
         setPieceSound();
         setTheme();
@@ -50,7 +63,7 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
     }
 
     public void setTheme() {
-        mParentLL.setBackgroundResource(ParamUtil.getInstance().getBgResId());
+        mBgIV.setImageBitmap(ImageUtil.getImageFromResource(ParamUtil.getInstance().getBgResId(), screenW, screenH));
         mGomokuView.setBoardColor(ParamUtil.getInstance().getBoardColor());
     }
 

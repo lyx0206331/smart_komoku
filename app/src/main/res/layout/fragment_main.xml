@@ -1,60 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_4"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin">
+    android:layout_height="match_parent">
 
-    <com.adrian.gomoku.views.GomokuView
-        android:id="@+id/gomoku_view"
+    <ImageView
+        android:id="@+id/iv_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_4" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/gomoku_view"
-        android:layout_marginTop="@dimen/activity_vertical_margin2"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
-        <com.adrian.gomoku.views.RippleButton
-            android:id="@+id/btn_revoke"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/base_blue"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1.0"
-            android:textSize="@dimen/normal_font"
-            android:text="@string/backward"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="center"
-            android:padding="12dp"
-            ripple:alphaFactor="0.7"
-            ripple:rippleColor="@color/white"
-            ripple:hover="true" />
+        <com.adrian.gomoku.views.GomokuView
+            android:id="@+id/gomoku_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
 
-        <com.adrian.gomoku.views.RippleButton
-            android:id="@+id/btn_restart"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="@color/base_blue"
-            android:textSize="@dimen/normal_font"
-            android:text="@string/start_new"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:gravity="center"
-            android:padding="12dp"
-            ripple:alphaFactor="0.7"
-            ripple:rippleColor="@color/white"
-            ripple:hover="true" />
+            android:layout_below="@id/gomoku_view"
+            android:layout_marginTop="@dimen/activity_vertical_margin2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+
+            <com.adrian.gomoku.views.RippleButton
+                android:id="@+id/btn_revoke"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/base_blue"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1.0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_font"
+                android:text="@string/backward"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center"
+                android:padding="12dp"
+                ripple:alphaFactor="0.7"
+                ripple:rippleColor="@color/white"
+                ripple:hover="true" />
+
+            <com.adrian.gomoku.views.RippleButton
+                android:id="@+id/btn_restart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:textColor="@color/white"
+                android:background="@color/base_blue"
+                android:textSize="@dimen/normal_font"
+                android:text="@string/start_new"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center"
+                android:padding="12dp"
+                ripple:alphaFactor="0.7"
+                ripple:rippleColor="@color/white"
+                ripple:hover="true" />
+        </LinearLayout>
+
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

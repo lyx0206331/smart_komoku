@@ -179,12 +179,9 @@ public class GomokuView extends View {
         if (mIsGameOver) return false;
 
         int action = event.getAction();
-//        Log.e("TAG", "action:" + action);
         if (action == MotionEvent.ACTION_UP) {
             int x = (int) event.getX();
             int y = (int) event.getY();
-
-//            Log.e("TAG", "x:" + x + " y:" + y);
 
             Point p = getValidPoint(x, y);
 
