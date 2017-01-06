@@ -26,6 +26,10 @@ public class BgMusicService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        initPlayer();
+    }
+
+    private void initPlayer() {
         if (mediaPlayer == null) {
             mediaPlayer = MediaPlayer.create(this, R.raw.bg_music);
             mediaPlayer.setLooping(true);
@@ -34,6 +38,7 @@ public class BgMusicService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        initPlayer();
         String action = intent.getAction();
         if (action.equals(ACTION_START_PLAY) && !mediaPlayer.isPlaying()) {
             mediaPlayer.start();
