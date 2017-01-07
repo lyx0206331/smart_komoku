@@ -15,7 +15,35 @@ android {
         multiDexEnabled true
         // 默认是umeng的渠道
         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "default_channel"]
+        //默认小米游戏中心渠道
+        manifestPlaceholders = [YOUMI_CHANNEL_VALUE: "10440"]
     }
+
+    sourceSets {
+        main {
+//            manifest.srcFile 'AndroidManifest.xml'
+//            java.srcDirs = ['src']
+//            resources.srcDirs = ['src']
+//            aidl.srcDirs = ['src']
+//            renderscript.srcDirs = ['src']
+//            res.srcDirs = ['res']
+//            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+
     signingConfigs {
         debug {
             // No debug config
@@ -87,12 +115,10 @@ def releaseTime() {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'de.cketti.library.changelog:ckchangelog:1.2.2'
@@ -100,4 +126,5 @@ dependencies {
     compile 'com.android.support:support-v4:25.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.larswerkman:HoloColorPicker:1.5'
+    compile files('src/main/libs/YoumiSdk_v7.0.0_2017-01-06.jar')
 }

@@ -1,5 +1,6 @@
 package com.adrian.gomoku.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,10 +12,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +31,10 @@ import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
+
+import net.youmi.android.normal.banner.BannerManager;
+import net.youmi.android.normal.banner.BannerViewListener;
+import net.youmi.android.normal.spot.SpotManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +78,8 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
         initMenuFragment();
         mainFragment = new MainFragment();
         addFragment(mainFragment, true, R.id.container);
+        //设置广告条
+        setupBannerAd();
     }
 
     @Override
@@ -230,6 +240,10 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
         super.onDestroy();
         Intent intent = new Intent(this, BgMusicService.class);
         stopService(intent);
+
+        // 展示广告条窗口的 onDestroy() 回调方法中调用
+        BannerManager.getInstance(mContext).onDestroy();
+        SpotManager.getInstance(this).onAppExit();
     }
 
     @Override
@@ -278,6 +292,42 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
     @Override
     public void onMenuItemLongClick(View clickedView, int position) {
 //        Toast.makeText(this, "Long clicked on position: " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 设置广告条广告
+     */
+    private void setupBannerAd() {
+        /**
+         * 悬浮布局
+         */
+        // 实例化LayoutParams
+        FrameLayout.LayoutParams layoutParams =
+                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        // 设置广告条的悬浮位置，这里示例为右下角
+        layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+        // 获取广告条
+        final View bannerView = BannerManager.getInstance(mContext)
+                .getBannerView(mContext, new BannerViewListener() {
+
+                    @Override
+                    public void onRequestSuccess() {
+                        logInfo("请求广告条成功");
+
+                    }
+
+                    @Override
+                    public void onSwitchBanner() {
+                        logDebug("广告条切换");
+                    }
+
+                    @Override
+                    public void onRequestFailed() {
+                        logError("请求广告条失败");
+                    }
+                });
+        // 添加广告条到窗口中
+        ((Activity) mContext).addContentView(bannerView, layoutParams);
     }
 
 }
