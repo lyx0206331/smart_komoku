@@ -206,7 +206,8 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
         } else {
             long currentTime = System.currentTimeMillis();
             if (Math.abs(currentTime - mLastBackPress) > mBackPressThreshold) {
-                Toast.makeText(this, R.string.back_again_quit, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, R.string.back_again_quit, Toast.LENGTH_SHORT).show();
+                showShortToast(getString(R.string.back_again_quit));
                 mLastBackPress = currentTime;
             } else {
                 finish();
@@ -276,7 +277,7 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
 
     @Override
     public void onMenuItemLongClick(View clickedView, int position) {
-        Toast.makeText(this, "Long clicked on position: " + position, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Long clicked on position: " + position, Toast.LENGTH_SHORT).show();
     }
 
 }
