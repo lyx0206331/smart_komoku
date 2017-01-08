@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/gomoku_view"
             android:layout_marginTop="@dimen/activity_vertical_margin2"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:orientation="horizontal">
