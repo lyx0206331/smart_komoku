@@ -10,12 +10,31 @@
 
     <include layout="@layout/toolbar" />
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/about_icon_margin_top"
+        android:src="@mipmap/ic_launcher_xiaomi" />
+
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/rule_desc"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:textSize="@dimen/normal_font"
+        android:textColor="@color/base_blue"
+        android:text="@string/about" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/activity_vertical_margin2"
+        android:textSize="@dimen/normal_font"
         android:textColor="@color/font_gray"
-        android:textSize="@dimen/normal_font" />
+        android:text="@string/about" />
 
 </LinearLayout>

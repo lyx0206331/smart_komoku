@@ -7,6 +7,7 @@
     <color name="ripple_float">#58FAAC</color>
 
     <color name="transparent">#00000000</color>
+    <color name="translucent">#88555555</color>
     <color name="white">#ffffff</color>
     <color name="font_gray">#555555</color>
     <color name="base_bg">#eeeeee</color>

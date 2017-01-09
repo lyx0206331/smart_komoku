@@ -1,6 +1,6 @@
-
 package com.adrian.gomoku.activity;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -9,12 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.adrian.gomoku.R;
-import com.adrian.gomoku.tools.CommUtil;
 
-public class AboutActivity extends BaseActivity {
-
-    private TextView mVersionTV;
-    private TextView mAppNameTV;
+public class RuleActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +24,8 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_rule);
         initToolbar();
-        mVersionTV = (TextView) findViewById(R.id.tv_version);
-        mAppNameTV = (TextView) findViewById(R.id.tv_name);
-
-        mAppNameTV.setText(CommUtil.getAppName(this));
-        mVersionTV.setText(getString(R.string.version) + CommUtil.getVersionName(this));
     }
 
     @Override
@@ -58,7 +49,7 @@ public class AboutActivity extends BaseActivity {
                 finish();
             }
         });
-        mToolBarTextView.setText(R.string.about);
+        mToolBarTextView.setText(R.string.rule);
     }
 
 

@@ -11,13 +11,18 @@ import android.widget.TextView;
 
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.service.BgMusicService;
+import com.adrian.gomoku.tools.CommUtil;
 import com.adrian.gomoku.tools.ParamUtil;
+import com.adrian.gomoku.views.RippleView;
 import com.adrian.gomoku.views.SwitchButton;
 
 public class OtherActivity extends BaseActivity {
 
     private SwitchButton mBgMusicSB;
     private SwitchButton mPieceSoundSB;
+    private RippleView mRuleRV;
+    private RippleView mUpdateRV;
+    private TextView mVersionTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,22 @@ public class OtherActivity extends BaseActivity {
                 ParamUtil.getInstance().setOpenedPieceSound(isChecked);
             }
         });
+        mRuleRV = (RippleView) findViewById(R.id.tv_rule);
+        mRuleRV.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+            @Override
+            public void onComplete(RippleView rippleView) {
+                startActivity(RuleActivity.class);
+            }
+        });
+        mUpdateRV = (RippleView) findViewById(R.id.tv_update);
+        mUpdateRV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShortToast(getString(R.string.has_no_update));
+            }
+        });
+        mVersionTV = (TextView) findViewById(R.id.tv_version);
+        mVersionTV.setText(CommUtil.getVersionName(this));
         initToolbar();
         mBgMusicSB.setChecked(ParamUtil.getInstance().openedBgMusic());
         mPieceSoundSB.setChecked(ParamUtil.getInstance().openedPieceSound());

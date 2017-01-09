@@ -16,6 +16,7 @@
     <string name="other">其它</string>
     <string name="other_settings">其它设置</string>
     <string name="about">关于</string>
+    <string name="version">版本:</string>
     <string name="context_menu">Context menu</string>
     <string name="confirm">确定</string>
 
@@ -28,6 +29,9 @@
 
     <string name="bg_music">背景音乐</string>
     <string name="piece_sound">落子音效</string>
+    <string name="rule">规则说明</string>
+    <string name="check_update">检查更新</string>
+    <string name="has_no_update">暂无可用更新!</string>
 
     <string name="rule_desc">规则说明:\n\t\t\t\t\t&#160;本游戏只为休闲娱乐之用，无禁手等严格规则，玩家可随意落子，只要在横向、竖向、斜向或者反斜向先形成连珠五子即为获胜！</string>
 

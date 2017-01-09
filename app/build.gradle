@@ -16,7 +16,7 @@ android {
         // 默认是umeng的渠道
         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "default_channel"]
         //默认小米游戏中心渠道
-        manifestPlaceholders = [YOUMI_CHANNEL_VALUE: "10440"]
+        manifestPlaceholders = [YOUMI_CHANNEL_VALUE: "10440"]   //10360
     }
 
     sourceSets {
