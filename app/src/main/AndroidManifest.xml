@@ -99,7 +99,12 @@
                 android:resource="@xml/file_provider" />
         </provider>
 
-        <activity android:name=".activity.RuleActivity"></activity>
+        <activity android:name=".activity.RuleActivity" />
+
+        <service
+            android:name=".service.DownloadService"
+            android:enabled="false"
+            android:exported="false"></service>
     </application>
 
 </manifest>

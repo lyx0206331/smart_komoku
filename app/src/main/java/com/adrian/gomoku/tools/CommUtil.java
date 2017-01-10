@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
@@ -61,5 +62,19 @@ public class CommUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 是否存在SD卡
+     *
+     * @return
+     */
+    public static boolean isHasSdcard() {
+        String status = Environment.getExternalStorageState();
+        if (status.equals(Environment.MEDIA_MOUNTED)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
