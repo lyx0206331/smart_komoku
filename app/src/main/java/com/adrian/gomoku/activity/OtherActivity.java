@@ -13,6 +13,7 @@ import com.adrian.gomoku.R;
 import com.adrian.gomoku.service.BgMusicService;
 import com.adrian.gomoku.tools.CommUtil;
 import com.adrian.gomoku.tools.ParamUtil;
+import com.adrian.gomoku.tools.UpdateHelper;
 import com.adrian.gomoku.views.RippleView;
 import com.adrian.gomoku.views.SwitchButton;
 
@@ -70,7 +71,8 @@ public class OtherActivity extends BaseActivity {
         mUpdateRV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showShortToast(getString(R.string.has_no_update));
+//                showShortToast(getString(R.string.has_no_update));
+                (new UpdateHelper(OtherActivity.this, false)).execute();
             }
         });
         mVersionTV = (TextView) findViewById(R.id.tv_version);

@@ -26,12 +26,14 @@ import com.adrian.gomoku.R;
 import com.adrian.gomoku.fragment.MainFragment;
 import com.adrian.gomoku.service.BgMusicService;
 import com.adrian.gomoku.tools.ParamUtil;
+import com.adrian.gomoku.tools.UpdateHelper;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
 
+import net.youmi.android.AdManager;
 import net.youmi.android.normal.banner.BannerManager;
 import net.youmi.android.normal.banner.BannerViewListener;
 import net.youmi.android.normal.spot.SpotManager;
@@ -85,6 +87,7 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
     @Override
     protected void loadData() {
 //        startBgMusic();
+        (new UpdateHelper(this, true)).execute();
     }
 
     private void startBgMusic() {
@@ -307,7 +310,7 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
         // 设置广告条的悬浮位置，这里示例为右下角
         layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
         // 获取广告条
-        final View bannerView = BannerManager.getInstance(mContext)
+        View bannerView = BannerManager.getInstance(mContext)
                 .getBannerView(mContext, new BannerViewListener() {
 
                     @Override
@@ -327,7 +330,7 @@ public class MainActivity extends BaseActivity implements OnMenuItemClickListene
                     }
                 });
         // 添加广告条到窗口中
-        ((Activity) mContext).addContentView(bannerView, layoutParams);
+        addContentView(bannerView, layoutParams);
     }
 
 }

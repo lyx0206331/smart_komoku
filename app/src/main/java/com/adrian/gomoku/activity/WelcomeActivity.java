@@ -9,8 +9,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.adrian.gomoku.R;
@@ -28,6 +30,7 @@ public class WelcomeActivity extends BaseActivity {
 
     private ImageView mBgIV;
     private PermissionHelper mPermissionHelper;
+    private LinearLayout mBottomLL;
 
     Handler handler = new Handler() {
         @Override
@@ -56,6 +59,7 @@ public class WelcomeActivity extends BaseActivity {
         DisplayMetrics dm = CommUtil.getScreenInfo();
         mBgIV = (ImageView) findViewById(R.id.iv_bg);
         mBgIV.setImageBitmap(ImageUtil.getImageFromResource(R.drawable.nav_0, dm.widthPixels, dm.heightPixels));
+        mBottomLL = (LinearLayout) findViewById(R.id.ll_bottom);
 //        handler.sendEmptyMessageDelayed(0, 2000);
     }
 
@@ -104,7 +108,6 @@ public class WelcomeActivity extends BaseActivity {
      */
     private void runApp() {
         //初始化SDK
-//        AdManager.getInstance(mContext).init("85aa56a59eac8b3d", "a14006f66f58d5d7", false, true);
         AdManager.getInstance(this).init("d04d2ef88fffe41b", "ea11dd60a66886f9", false, true);
         //设置开屏
         setupSplashAd();
@@ -136,6 +139,7 @@ public class WelcomeActivity extends BaseActivity {
                     @Override
                     public void onShowSuccess() {
                         logInfo("开屏展示成功");
+                        mBottomLL.setVisibility(View.VISIBLE);
                     }
 
                     @Override
