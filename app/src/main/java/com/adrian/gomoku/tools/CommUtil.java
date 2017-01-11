@@ -1,9 +1,11 @@
 package com.adrian.gomoku.tools;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -76,5 +78,32 @@ public class CommUtil {
         } else {
             return false;
         }
+    }
+
+    /**
+     * 安装apk
+     *
+     * @param context
+     * @param apkPath
+     */
+    public static void installApk(Context context, String apkPath) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.parse("file://" + apkPath),
+                "application/vnd.android.package-archive");
+        context.startActivity(intent);
+    }
+
+    /**
+     * 卸载apk
+     *
+     * @param context
+     * @param pkgName
+     */
+    public static void uninstallApk(Context context, String pkgName) {
+        Uri uri = Uri.parse("package:" + pkgName);
+        Intent intent = new Intent(Intent.ACTION_DELETE, uri);
+        context.startActivity(intent);
     }
 }

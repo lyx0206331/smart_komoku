@@ -3,19 +3,24 @@ package com.adrian.gomoku.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.adrian.gomoku.MyReceiver;
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.service.BgMusicService;
 import com.adrian.gomoku.tools.CommUtil;
+import com.adrian.gomoku.tools.DownloadTask;
 import com.adrian.gomoku.tools.ParamUtil;
 import com.adrian.gomoku.tools.UpdateHelper;
 import com.adrian.gomoku.views.RippleView;
 import com.adrian.gomoku.views.SwitchButton;
+
+import java.io.File;
 
 public class OtherActivity extends BaseActivity {
 
@@ -72,7 +77,24 @@ public class OtherActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //                showShortToast(getString(R.string.has_no_update));
-                (new UpdateHelper(OtherActivity.this, false)).execute();
+//                (new UpdateHelper(OtherActivity.this, false)).execute();
+
+                Intent intent = new Intent(MyReceiver.ACTION_UPDATE);
+                intent.putExtra("url", "http://www.ximalaya.com/down?tag=web&client=android");
+                mContext.sendBroadcast(intent);
+
+//                String savePath = null;
+//                    if (CommUtil.isHasSdcard()) {
+//                        savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/gomoku/download/";
+//                    } else {
+//                        savePath = getApplicationContext().getFilesDir().getAbsolutePath() + "/gomoku/download/";
+//                    }
+//                    File desDir = new File(savePath);
+//                    if (!desDir.exists()) {
+//                        desDir.mkdirs();
+//                    }
+//                DownloadTask task = new DownloadTask(OtherActivity.this, savePath + "gomoku.apk");
+//                task.execute("http://www.ximalaya.com/down?tag=web&client=android");
             }
         });
         mVersionTV = (TextView) findViewById(R.id.tv_version);
