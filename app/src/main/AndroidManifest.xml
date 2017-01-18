@@ -105,14 +105,23 @@
         <service
             android:name=".service.DownloadService"
             android:enabled="false"
-            android:exported="false" />
-
-        <receiver
-            android:name=".MyReceiver"
-            android:enabled="false"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.adrian.start_update" />
+                <action android:name="com.adrian.start_download" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".receiver.MyReceiver">
+            <intent-filter>
+                <action android:name="com.adrian.gomoku.start_update" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
             </intent-filter>
         </receiver>
     </application>

@@ -1,6 +1,5 @@
 package com.adrian.gomoku.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,7 +9,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.adrian.gomoku.MyReceiver;
+import com.adrian.gomoku.receiver.MyReceiver;
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.service.BgMusicService;
 import com.adrian.gomoku.tools.CommUtil;
@@ -76,12 +75,13 @@ public class OtherActivity extends BaseActivity {
         mUpdateRV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showShortToast(getString(R.string.has_no_update));
-//                (new UpdateHelper(OtherActivity.this, false)).execute();
+                (new UpdateHelper(OtherActivity.this, false)).execute();
 
-                Intent intent = new Intent(MyReceiver.ACTION_UPDATE);
-                intent.putExtra("url", "http://www.ximalaya.com/down?tag=web&client=android");
-                mContext.sendBroadcast(intent);
+//                Intent intent = new Intent(MyReceiver.ACTION_UPDATE);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("url", "http://www.ximalaya.com/down?tag=web&client=android");
+//                intent.putExtras(bundle);
+//                mContext.sendBroadcast(intent);
 
 //                String savePath = null;
 //                    if (CommUtil.isHasSdcard()) {

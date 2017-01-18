@@ -9,17 +9,7 @@ import android.util.Log;
 import com.adrian.gomoku.tools.CommUtil;
 import com.adrian.gomoku.tools.DownloadTask;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class DownloadService extends Service {
 
@@ -61,7 +51,7 @@ public class DownloadService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String action = intent.getAction();
-        String url = intent.getStringExtra("apk_url");
+        String url = intent.getExtras().getString("url");
         Log.e("DOWNLOAD", "action : " + action + " -- url : " + url);
         if (action.equals(ACTION_START_DOWNLOAD)) {
             downloadTask = new DownloadTask(this, savePath + appName);
@@ -73,5 +63,10 @@ public class DownloadService extends Service {
             }
         }
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -109,7 +109,7 @@ android {
         flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
     }
 
-    useLibrary 'org.apache.http.legacy'
+//    useLibrary 'org.apache.http.legacy'
 }
 
 def releaseTime() {

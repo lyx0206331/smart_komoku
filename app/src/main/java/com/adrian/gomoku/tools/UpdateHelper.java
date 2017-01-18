@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.adrian.gomoku.MyReceiver;
+import com.adrian.gomoku.receiver.MyReceiver;
 import com.adrian.gomoku.R;
-import com.adrian.gomoku.service.DownloadService;
 
 import net.youmi.android.AdManager;
 import net.youmi.android.update.AppUpdateInfo;
@@ -22,10 +19,10 @@ import net.youmi.android.update.AppUpdateInfo;
  */
 
 public class UpdateHelper extends AsyncTask<Void, Void, AppUpdateInfo> {
-    private Activity mContext;
+    private Context mContext;
     private boolean isAuto;
 
-    public UpdateHelper(Activity context, boolean autoCheck) {
+    public UpdateHelper(Context context, boolean autoCheck) {
         mContext = context;
         isAuto = autoCheck;
     }
@@ -69,7 +66,9 @@ public class UpdateHelper extends AsyncTask<Void, Void, AppUpdateInfo> {
                                     // ps：这里示例点击“马上升级”按钮之后简单地调用系统浏览器进行新版本的下载，
                                     // 但强烈建议开发者实现自己的下载管理流程，这样可以获得更好的用户体验。
                                     Intent intent = new Intent(MyReceiver.ACTION_UPDATE);
-                                    intent.putExtra("url", "http://www.ximalaya.com/down?tag=web&client=android");
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("url", "http://www.ximalaya.com/down?tag=web&client=android");
+                                    intent.putExtras(bundle);
                                     mContext.sendBroadcast(intent);
                                 }
                             })
