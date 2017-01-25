@@ -19,15 +19,14 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        Log.e("RECEIVER", action);
+//        Log.e("RECEIVER", action);
         Uri uri = intent.getData();
         if (action.equals(ACTION_UPDATE)) {
             Intent i = new Intent(context, DownloadService.class);
             i.setAction(DownloadService.ACTION_START_DOWNLOAD);
             i.putExtras(intent.getExtras());
             String url = intent.getExtras().getString("url");
-            Log.e("URL", "url:" + url);
-//            i.putExtra("apk_url", uri);
+//            Log.e("URL", "url:" + url);
             context.startService(i);
         } else if (action.equals(Intent.ACTION_PACKAGE_ADDED)) {
             System.out.println(uri + "被安装了");

@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.adrian.gomoku.application.MyApplication;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,6 +32,7 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
 
     @Override
     protected String doInBackground(String... sUrl) {
+        MyApplication.getInstance().setDownloading(true);
         InputStream input = null;
         OutputStream output = null;
         HttpURLConnection connection = null;
@@ -95,11 +98,12 @@ public class DownloadTask extends AsyncTask<String, Integer, String> {
     @Override
     protected void onProgressUpdate(Integer... progress) {
         super.onProgressUpdate(progress);
-        Log.e("DOWNLOAD", "download percent:" + progress[0]);
+//        Log.e("DOWNLOAD", "download percent:" + progress[0]);
     }
 
     @Override
     protected void onPostExecute(String result) {
+        MyApplication.getInstance().setDownloading(false);
         mWakeLock.release();
         if (!TextUtils.isEmpty(result)) {
             Toast.makeText(context, "download failed!" + result, Toast.LENGTH_SHORT).show();

@@ -52,7 +52,7 @@ public class DownloadService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         String action = intent.getAction();
         String url = intent.getExtras().getString("url");
-        Log.e("DOWNLOAD", "action : " + action + " -- url : " + url);
+//        Log.e("DOWNLOAD", "action : " + action + " -- url : " + url);
         if (action.equals(ACTION_START_DOWNLOAD)) {
             downloadTask = new DownloadTask(this, savePath + appName);
             downloadTask.execute(url);

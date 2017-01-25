@@ -70,22 +70,22 @@ public class WelcomeActivity extends BaseActivity {
         mPermissionHelper.setOnApplyPermissionListener(new PermissionHelper.OnApplyPermissionListener() {
             @Override
             public void onAfterApplyAllPermission() {
-                Log.i(TAG, "All of requested permissions has been granted, so run app logic.");
+//                Log.i(TAG, "All of requested permissions has been granted, so run app logic.");
                 runApp();
             }
         });
         if (Build.VERSION.SDK_INT < 23) {
             // 如果系统版本低于23，直接跑应用的逻辑
-            Log.d(TAG, "The api level of system is lower than 23, so run app logic directly.");
+//            Log.d(TAG, "The api level of system is lower than 23, so run app logic directly.");
             runApp();
         } else {
             // 如果权限全部申请了，那就直接跑应用逻辑
             if (mPermissionHelper.isAllRequestedPermissionGranted()) {
-                Log.d(TAG, "All of requested permissions has been granted, so run app logic directly.");
+//                Log.d(TAG, "All of requested permissions has been granted, so run app logic directly.");
                 runApp();
             } else {
                 // 如果还有权限为申请，而且系统版本大于23，执行申请权限逻辑
-                Log.i(TAG, "Some of requested permissions hasn't been granted, so apply permissions first.");
+//                Log.i(TAG, "Some of requested permissions hasn't been granted, so apply permissions first.");
                 mPermissionHelper.applyPermissions();
             }
         }
@@ -107,8 +107,8 @@ public class WelcomeActivity extends BaseActivity {
      * 跑应用的逻辑
      */
     private void runApp() {
-        //初始化SDK
-        AdManager.getInstance(this).init("d04d2ef88fffe41b", "ea11dd60a66886f9", false, true);
+//        //初始化SDK
+//        AdManager.getInstance(this).init("d04d2ef88fffe41b", "ea11dd60a66886f9", false, true);
         //设置开屏
         setupSplashAd();
     }

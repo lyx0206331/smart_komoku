@@ -80,3 +80,9 @@
 -keep public class [com.adrian.game2048].R$*{
     public static final int *;
 }
+
+#有米广告
+-keep public class com.mi.adtracker.MiAdTracker{ *; }
+-keep public class android.support.**{
+    *;
+}

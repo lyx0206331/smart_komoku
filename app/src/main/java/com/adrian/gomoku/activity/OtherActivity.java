@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.adrian.gomoku.application.MyApplication;
 import com.adrian.gomoku.receiver.MyReceiver;
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.service.BgMusicService;
@@ -75,7 +76,11 @@ public class OtherActivity extends BaseActivity {
         mUpdateRV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                (new UpdateHelper(OtherActivity.this, false)).execute();
+                if (MyApplication.getInstance().isDownloading()) {
+                    showShortToast(getString(R.string.is_downloading));
+                } else {
+                    (new UpdateHelper(OtherActivity.this, false)).execute();
+                }
 
 //                Intent intent = new Intent(MyReceiver.ACTION_UPDATE);
 //                Bundle bundle = new Bundle();

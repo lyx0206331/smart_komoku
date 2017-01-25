@@ -35,6 +35,7 @@
     <string name="has_new_version">发现新版本</string>
     <string name="update_now">马上升级</string>
     <string name="update_next_time">下次再说</string>
+    <string name="is_downloading">正在下载...</string>
 
     <string name="rule_desc">规则说明:\n\t\t\t\t\t&#160;本游戏只为休闲娱乐之用，无禁手等严格规则，玩家可随意落子，只要在横向、竖向、斜向或者反斜向先形成连珠五子即为获胜！</string>
 

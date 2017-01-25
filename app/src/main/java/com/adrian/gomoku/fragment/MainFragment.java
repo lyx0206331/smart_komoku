@@ -66,6 +66,7 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
         setSinglePlayer();
         setPieceSound();
         setTheme();
+//        setupBannerAd();
         return rootView;
     }
 
@@ -128,5 +129,44 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    /**
+     * 设置广告条广告
+     */
+    private void setupBannerAd() {
+        /**
+         * 悬浮布局
+         */
+        // 实例化LayoutParams
+        FrameLayout.LayoutParams layoutParams =
+                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        // 设置广告条的悬浮位置，这里示例为右下角
+        layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+        // 获取广告条
+        View bannerView = BannerManager.getInstance(getContext())
+                .getBannerView(getContext(), new BannerViewListener() {
+
+                    @Override
+                    public void onRequestSuccess() {
+//                        logInfo("请求广告条成功");
+                        Log.i("TAG", "请求广告条成功");
+
+                    }
+
+                    @Override
+                    public void onSwitchBanner() {
+//                        logDebug("广告条切换");
+                        Log.d("TAG", "广告条切换");
+                    }
+
+                    @Override
+                    public void onRequestFailed() {
+//                        logError("请求广告条失败");
+                        Log.e("TAG", "请求广告条失败");
+                    }
+                });
+        // 添加广告条到窗口中
+        getActivity().addContentView(bannerView, layoutParams);
     }
 }

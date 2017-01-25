@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.adrian.gomoku.receiver.MyReceiver;
 import com.adrian.gomoku.R;
@@ -43,14 +45,14 @@ public class UpdateHelper extends AsyncTask<Void, Void, AppUpdateInfo> {
     protected void onPostExecute(final AppUpdateInfo result) {
         super.onPostExecute(result);
         try {
-//            if (result == null || result.getUrl() == null) {
-//                Log.i("CHECK_UPDATE", "has no new version!");
-//                if (!isAuto) {
-//                    // 如果 AppUpdateInfo 为 null 或它的 url 属性为 null，则可以判断为没有新版本。
-//                    Toast.makeText(mContext, R.string.has_no_update, Toast.LENGTH_SHORT).show();
-//                }
-//                return;
-//            }
+            if (result == null || result.getUrl() == null) {
+                Log.i("CHECK_UPDATE", "has no new version!");
+                if (!isAuto) {
+                    // 如果 AppUpdateInfo 为 null 或它的 url 属性为 null，则可以判断为没有新版本。
+                    Toast.makeText(mContext, R.string.has_no_update, Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
 
             // 这里简单示例使用一个对话框来显示更新信息
             new AlertDialog.Builder(mContext)
@@ -67,7 +69,7 @@ public class UpdateHelper extends AsyncTask<Void, Void, AppUpdateInfo> {
                                     // 但强烈建议开发者实现自己的下载管理流程，这样可以获得更好的用户体验。
                                     Intent intent = new Intent(MyReceiver.ACTION_UPDATE);
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("url", "http://www.ximalaya.com/down?tag=web&client=android");
+                                    bundle.putString("url", result.getUrl());
                                     intent.putExtras(bundle);
                                     mContext.sendBroadcast(intent);
                                 }
