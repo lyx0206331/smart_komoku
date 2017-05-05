@@ -48,7 +48,7 @@ android {
         }
 
         release {
-            storeFile file("/home/adrian/Android/appkey.keystore")
+            storeFile file("/Volumes/MacintoshHD/Android/appkey.keystore")
             storePassword "lengyuxuan1534."
             keyAlias "adrian_keystore"
             keyPassword "lengyuxuan1534."
