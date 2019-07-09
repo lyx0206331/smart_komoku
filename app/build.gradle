@@ -45,10 +45,10 @@ android {
         }
 
         release {
-            storeFile file("/Volumes/MacintoshHD/Android/appkey.keystore")
-            storePassword "lengyuxuan1534."
-            keyAlias "adrian_keystore"
-            keyPassword "lengyuxuan1534."
+            storeFile file("/Volumes/MacintoshHD/Android/keystore")
+            storePassword "**********"
+            keyAlias "keystore"
+            keyPassword "**********"
         }
     }
 
