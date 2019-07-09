@@ -3,12 +3,18 @@ package com.adrian.gomoku.views;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.RadialGradient;
+import android.graphics.Rect;
+import android.graphics.Shader;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Button;
 
 import com.adrian.gomoku.R;
 import com.nineoldandroids.animation.Animator;
@@ -20,7 +26,7 @@ import com.nineoldandroids.view.ViewHelper;
  */
 
 @SuppressLint("ClickableViewAccessibility")
-public class RippleButton extends Button {
+public class RippleButton extends AppCompatButton {
 
     private float mDownX;
     private float mDownY;
@@ -226,7 +232,7 @@ public class RippleButton extends Button {
             return;
         }
 
-        canvas.save(Canvas.CLIP_SAVE_FLAG);
+        canvas.save();
 
         mPath.reset();
         mPath.addCircle(mDownX, mDownY, mRadius, Path.Direction.CW);
