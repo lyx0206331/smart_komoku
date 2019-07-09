@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.adrian.gomoku"
-        minSdkVersion 14
-        targetSdkVersion 25
+        minSdkVersion 19
+        targetSdkVersion 28
         versionCode 6
         versionName "1.0.2"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        flavorDimensions "default"
         // dex突破65535的限制
         multiDexEnabled true
         // 默认是umeng的渠道
@@ -28,9 +28,6 @@ android {
 //            assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
         }
-
-        // Move the tests to tests/java, tests/res, etc...
-        instrumentTest.setRoot('tests')
 
         // Move the build types to build-types/<type>
         // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
@@ -79,14 +76,12 @@ android {
             signingConfig signingConfigs.release
 
             applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def outputFile = output.outputFile
-                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        // 输出apk名称为五子棋_v1.0_2015-01-15_wandoujia.apk
-                        def fileName = "休闲五子棋_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
-                        output.outputFile = new File(outputFile.parent, fileName)
-                    }
+                variant.outputs.all { output ->
+                    // 输出apk名称为五子棋_v1.0_2015-01-15_wandoujia.apk
+                    def fileName = "休闲五子棋_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                    outputFileName = fileName
                 }
+
             }
         }
     }
@@ -115,16 +110,14 @@ def releaseTime() {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.umeng.analytics:analytics:latest.integration'
-    compile 'de.cketti.library.changelog:ckchangelog:1.2.2'
-    compile 'com.yalantis:contextmenu:1.0.7'
-    compile 'com.android.support:support-v4:25.1.0'
-    testCompile 'junit:junit:4.12'
-    compile 'com.larswerkman:HoloColorPicker:1.5'
-    compile files('src/main/libs/YoumiSdk_v7.0.1_2017-01-06.jar')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.umeng.analytics:analytics:latest.integration'
+    implementation 'de.cketti.library.changelog:ckchangelog:1.2.2'
+    implementation 'com.yalantis:contextmenu:1.0.7'
+    implementation 'com.android.support:support-v4:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.larswerkman:HoloColorPicker:1.5'
+    implementation files('src/main/libs/YoumiSdk_v7.0.1_2017-01-06.jar')
 }
