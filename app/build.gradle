@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -111,7 +113,6 @@ def releaseTime() {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.umeng.analytics:analytics:latest.integration'
     implementation 'de.cketti.library.changelog:ckchangelog:1.2.2'
@@ -119,5 +120,8 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.larswerkman:HoloColorPicker:1.5'
-    implementation files('src/main/libs/YoumiSdk_v7.0.1_2017-01-06.jar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

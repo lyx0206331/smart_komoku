@@ -1,15 +1,11 @@
 package com.adrian.gomoku.activity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,12 +15,6 @@ import com.adrian.gomoku.R;
 import com.adrian.gomoku.tools.CommUtil;
 import com.adrian.gomoku.tools.ImageUtil;
 import com.adrian.gomoku.tools.PermissionHelper;
-
-import net.youmi.android.AdManager;
-import net.youmi.android.normal.common.ErrorCode;
-import net.youmi.android.normal.spot.SplashViewSettings;
-import net.youmi.android.normal.spot.SpotListener;
-import net.youmi.android.normal.spot.SpotManager;
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -123,67 +113,11 @@ public class WelcomeActivity extends BaseActivity {
                 new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         params.addRule(RelativeLayout.ABOVE, R.id.view_divider);
 
-        // 对开屏进行设置
-        SplashViewSettings splashViewSettings = new SplashViewSettings();
-        //		// 设置是否展示失败自动跳转，默认自动跳转
-        //		splashViewSettings.setAutoJumpToTargetWhenShowFailed(false);
-        // 设置跳转的窗口类
-        splashViewSettings.setTargetClass(MainActivity.class);
-        // 设置开屏的容器
-        splashViewSettings.setSplashViewContainer(splashLayout);
-
-        // 展示开屏广告
-        SpotManager.getInstance(mContext)
-                .showSplash(mContext, splashViewSettings, new SpotListener() {
-
-                    @Override
-                    public void onShowSuccess() {
-                        logInfo("开屏展示成功");
-                        mBottomLL.setVisibility(View.VISIBLE);
-                    }
-
-                    @Override
-                    public void onShowFailed(int errorCode) {
-                        logError("开屏展示失败");
-                        switch (errorCode) {
-                            case ErrorCode.NON_NETWORK:
-                                logError("网络异常");
-                                break;
-                            case ErrorCode.NON_AD:
-                                logError("暂无开屏广告");
-                                break;
-                            case ErrorCode.RESOURCE_NOT_READY:
-                                logError("开屏资源还没准备好");
-                                break;
-                            case ErrorCode.SHOW_INTERVAL_LIMITED:
-                                logError("开屏展示间隔限制");
-                                break;
-                            case ErrorCode.WIDGET_NOT_IN_VISIBILITY_STATE:
-                                logError("开屏控件处在不可见状态");
-                                break;
-                            default:
-                                logError("errorCode: %d", errorCode);
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onSpotClosed() {
-                        logDebug("开屏被关闭");
-                    }
-
-                    @Override
-                    public void onSpotClicked(boolean isWebPage) {
-                        logDebug("开屏被点击");
-                        logInfo("是否是网页广告？%s", isWebPage ? "是" : "不是");
-                    }
-                });
+        handler.sendEmptyMessageDelayed(0, 3000);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // 开屏展示界面的 onDestroy() 回调方法中调用
-        SpotManager.getInstance(mContext).onDestroy();
     }
 }

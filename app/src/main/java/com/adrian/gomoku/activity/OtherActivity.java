@@ -2,25 +2,19 @@ package com.adrian.gomoku.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.adrian.gomoku.application.MyApplication;
-import com.adrian.gomoku.receiver.MyReceiver;
 import com.adrian.gomoku.R;
+import com.adrian.gomoku.application.MyApplication;
 import com.adrian.gomoku.service.BgMusicService;
 import com.adrian.gomoku.tools.CommUtil;
-import com.adrian.gomoku.tools.DownloadTask;
 import com.adrian.gomoku.tools.ParamUtil;
-import com.adrian.gomoku.tools.UpdateHelper;
 import com.adrian.gomoku.views.RippleView;
 import com.adrian.gomoku.views.SwitchButton;
-
-import java.io.File;
 
 public class OtherActivity extends BaseActivity {
 
@@ -79,7 +73,7 @@ public class OtherActivity extends BaseActivity {
                 if (MyApplication.getInstance().isDownloading()) {
                     showShortToast(getString(R.string.is_downloading));
                 } else {
-                    (new UpdateHelper(OtherActivity.this, false)).execute();
+
                 }
 
 //                Intent intent = new Intent(MyReceiver.ACTION_UPDATE);

@@ -16,10 +16,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.adrian.gomoku.R;
-import com.adrian.gomoku.ai.GomokuAI;
+import com.adrian.gomoku.ai.KGomokuAI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public class GomokuView extends View {
     private boolean mIsWhiteWinner;
 
     private IGameOverListener listener;
-    private GomokuAI gomokuAI;
+    private KGomokuAI gomokuAI;
 
     private SoundPool soundPool;
     private int pieceSoundResId;
@@ -101,7 +100,7 @@ public class GomokuView extends View {
         mWhitePiece = BitmapFactory.decodeResource(getResources(), R.drawable.piece1);
         mBlackPiece = BitmapFactory.decodeResource(getResources(), R.drawable.piece0);
 
-        gomokuAI = new GomokuAI(MAX_LINE);
+        gomokuAI = new KGomokuAI(MAX_LINE);
     }
 
     public int getPieceSoundResId() {

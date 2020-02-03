@@ -80,23 +80,6 @@
             android:enabled="true"
             android:exported="false" />
 
-        <!-- 有米广告 -->
-        <activity
-            android:name="net.youmi.android.AdBrowser"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
-
-        <service
-            android:name="net.youmi.android.AdService"
-            android:exported="false" />
-
-        <receiver android:name="net.youmi.android.AdReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
         <!-- 有米SDK为了兼容Android N应用间共享文件行为变更而需要配置的FileProvider -->
         <!-- 这里主要为授予有米SDK拥有打开apk安装界面的功能 -->
         <!-- 请务必修改 android:authorities 为贵应用的标识，一般为 包名.fileProvider -->
