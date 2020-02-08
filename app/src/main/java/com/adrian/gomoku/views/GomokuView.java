@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
+import android.support.annotation.IntRange;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -66,12 +67,14 @@ public class GomokuView extends View {
     private boolean isAiOpened = false;
     private boolean isSoundOpened = true;
 
+    private int diffcultLevel = 3;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case AI_TURN:
-                    Point aiPoint = gomokuAI.getBestPoint(mWhiteArray, mBlackArray);
+                    Point aiPoint = gomokuAI.getBestPoint(mWhiteArray, mBlackArray, diffcultLevel);
                     mWhiteArray.add(aiPoint);
                     invalidate();
                     playSound();
@@ -405,6 +408,20 @@ public class GomokuView extends View {
 
     public void setListener(IGameOverListener listener) {
         this.listener = listener;
+    }
+
+    public int getDiffcultLevel() {
+        return diffcultLevel;
+    }
+
+    /**
+     * 设置难度等级
+     *
+     * @param diffcultLevel 一级最高，二级次之，三级最低
+     */
+    public void setDiffcultLevel(@IntRange(from = 1, to = 3) int diffcultLevel) {
+        this.diffcultLevel = diffcultLevel;
+        start();
     }
 
     public void start() {

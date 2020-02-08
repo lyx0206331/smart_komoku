@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -10,7 +10,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.AppStartLoad" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.AppStartLoad" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="android:windowBackground">@drawable/nav_0</item>
         <item name="android:windowFullscreen">true</item>

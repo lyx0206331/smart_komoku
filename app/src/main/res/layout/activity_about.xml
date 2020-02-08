@@ -37,4 +37,30 @@
         android:textColor="@color/font_gray"
         android:text="@string/about" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/activity_vertical_margin2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="email"
+            android:textSize="@dimen/normal_font"
+            android:textColor="@color/font_gray"
+            android:text="@string/mail" />
+
+        <TextView
+            android:id="@+id/tvMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="email"
+            android:textSize="@dimen/normal_font"
+            android:textColor="@color/font_gray"
+            android:text="@string/mail_address" />
+
+    </LinearLayout>
+
 </LinearLayout>

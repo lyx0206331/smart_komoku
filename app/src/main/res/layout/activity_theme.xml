@@ -157,6 +157,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/base_blue"
                     android:text="@string/confirm"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/normal_font" />
             </com.adrian.gomoku.views.RippleView>
         </LinearLayout>

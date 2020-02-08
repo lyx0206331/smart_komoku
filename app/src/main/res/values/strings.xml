@@ -19,6 +19,11 @@
     <string name="version">版本:</string>
     <string name="context_menu">Context menu</string>
     <string name="confirm">确定</string>
+    <string name="junior">初级</string>
+    <string name="middle_level">中级</string>
+    <string name="high_level">高级</string>
+    <string name="mail">邮箱:</string>
+    <string name="mail_address">rq880113@163.com</string>
 
     <string name="bg_choose">背景选择</string>
     <string name="board_color">棋盘颜色</string>

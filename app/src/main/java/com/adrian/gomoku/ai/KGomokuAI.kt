@@ -1,6 +1,7 @@
 package com.adrian.gomoku.ai
 
 import android.graphics.Point
+import android.support.annotation.IntRange
 import android.util.Log
 import com.adrian.gomoku.BuildConfig
 
@@ -120,9 +121,11 @@ class KGomokuAI(private val maxLineCount: Int = 15) {
      *
      * @param whiteArray
      * @param blackArray
+     * @param level 一级最高，二级次之，三级最低
      * @return
      */
-    fun getBestPoint(whiteArray: ArrayList<Point>, blackArray: ArrayList<Point>): Point {
+    @JvmOverloads
+    fun getBestPoint(whiteArray: ArrayList<Point>, blackArray: ArrayList<Point>, @IntRange(from = 1, to = 3) level: Int = 1): Point {
         val playerScore = Array(maxLineCount) { IntArray(maxLineCount) }
         val aiScore = Array(maxLineCount) { IntArray(maxLineCount) }
         var maxScore = 0
@@ -156,8 +159,14 @@ class KGomokuAI(private val maxLineCount: Int = 15) {
             }
         }
 
-        for (i in 0 until maxLineCount) {
-            for (j in 0 until maxLineCount) {
+        val calcCount = when (level) {
+            1 -> maxLineCount
+            2 -> maxLineCount * 2 / 3
+            3 -> maxLineCount * 8 / 15
+            else -> maxLineCount
+        }
+        for (i in 0 until calcCount) {
+            for (j in 0 until calcCount) {
                 if (playerScore[i][j] > maxScore) {
                     maxScore = playerScore[i][j]
                     u = i

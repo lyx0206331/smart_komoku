@@ -11,10 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.tools.CommUtil;
-import com.adrian.gomoku.tools.ImageUtil;
 import com.adrian.gomoku.tools.ParamUtil;
 import com.adrian.gomoku.views.GomokuView;
 
@@ -28,6 +28,7 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
     private AlertDialog mAlertDialog;
     private Button mRevokeBtn;
     private Button mRestartBtn;
+    private RadioGroup mRgLevel;
 
     private Display display;
     private DisplayMetrics dm;
@@ -40,10 +41,27 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
         mGomokuView = (GomokuView) rootView.findViewById(R.id.gomoku_view);
         mRevokeBtn = (Button) rootView.findViewById(R.id.btn_revoke);
         mRestartBtn = (Button) rootView.findViewById(R.id.btn_restart);
+        mRgLevel = rootView.findViewById(R.id.rgLevel);
         mGomokuView.setPieceSoundResId(R.raw.piece);
         mGomokuView.setListener(this);
         mRevokeBtn.setOnClickListener(this);
         mRestartBtn.setOnClickListener(this);
+        mRgLevel.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rbJuniorLevel:
+                        mGomokuView.setDiffcultLevel(3);
+                        break;
+                    case R.id.rbMiddleLevel:
+                        mGomokuView.setDiffcultLevel(2);
+                        break;
+                    case R.id.rbHighLevel:
+                        mGomokuView.setDiffcultLevel(1);
+                        break;
+                }
+            }
+        });
 
         ChangeLog cl = new ChangeLog(getContext());
         if (cl.isFirstRun()) {
@@ -58,11 +76,13 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
         setPieceSound();
         setTheme();
 //        setupBannerAd();
+        mRgLevel.check(R.id.rbJuniorLevel);
         return rootView;
     }
 
     public void setTheme() {
-        mBgIV.setImageBitmap(ImageUtil.getImageFromResource(ParamUtil.getInstance().getBgResId(), screenW, screenH));
+//        mBgIV.setImageBitmap(ImageUtil.getImageFromResource(ParamUtil.getInstance().getBgResId(), screenW, screenH));
+        mBgIV.setBackgroundResource(ParamUtil.getInstance().getBgResId());
         mGomokuView.setBoardColor(ParamUtil.getInstance().getBoardColor());
     }
 
@@ -99,7 +119,7 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
                     mGomokuView.start();
                     dialog.dismiss();
                 }
-            }).setCancelable(false).create();
+            }).setCancelable(true).create();
         }
         mAlertDialog.setMessage(getString(msgId));
         mAlertDialog.show();

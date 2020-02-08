@@ -11,7 +11,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_4" />
+        android:background="@drawable/bg_4" />
+
+    <RadioGroup
+        android:id="@+id/rgLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/translucent"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/rbJuniorLevel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="@string/junior"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_font" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/rbMiddleLevel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="@string/middle_level"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_font" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/rbHighLevel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:text="@string/high_level"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_font" />
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
