@@ -22,7 +22,7 @@
 -dontpreverify                   # 混淆时是否做预校验
 -verbose                         # 混淆时是否记录日志
 -keepattributes *Annotation*     # 保持注解
--ignorewarning                   # 忽略警告
+-ignorewarnings                  # 忽略警告
 -dontoptimize                    # 优化不优化输入的类文件
 
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*  # 混淆时所采用的算法
@@ -77,12 +77,11 @@
 -keepclassmembers class * {
     public <init> (org.json.JSONObject);
 }
--keep public class [com.adrian.game2048].R$*{
+-keep public class [com.adrian.gomoku].R$*{
     public static final int *;
 }
 
-#有米广告
--keep public class com.mi.adtracker.MiAdTracker{ *; }
--keep public class android.support.**{
-    *;
-}
+#华为广告
+-keep class com.huawei.openalliance.ad.** { *; }
+-keep class com.huawei.hms.ads.** { *; }
+-keep interface com.huawei.hms.ads.** {*; }

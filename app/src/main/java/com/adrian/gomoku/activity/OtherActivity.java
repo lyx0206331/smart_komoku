@@ -2,11 +2,12 @@ package com.adrian.gomoku.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.application.MyApplication;

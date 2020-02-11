@@ -12,9 +12,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <!-- 如果使用积分墙广告,还需要配置下面权限 -->
-    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -22,6 +19,7 @@
     <application
         android:name=".application.MyApplication"
         android:icon="@mipmap/ic_launcher_xiaomi"
+        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -33,11 +31,6 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
-
-        <!-- 有米广告渠道 -->
-        <meta-data
-            android:name="YOUMI_CHANNEL"
-            android:value="10990" />
 
         <!--android:theme="@style/Theme.AppStartLoad"-->
         <activity
@@ -79,19 +72,6 @@
             android:name=".service.BgMusicService"
             android:enabled="true"
             android:exported="false" />
-
-        <!-- 有米SDK为了兼容Android N应用间共享文件行为变更而需要配置的FileProvider -->
-        <!-- 这里主要为授予有米SDK拥有打开apk安装界面的功能 -->
-        <!-- 请务必修改 android:authorities 为贵应用的标识，一般为 包名.fileProvider -->
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.adrian.gomoku.fileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_provider" />
-        </provider>
 
         <activity android:name=".activity.RuleActivity" />
 

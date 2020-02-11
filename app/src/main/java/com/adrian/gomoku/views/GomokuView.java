@@ -12,11 +12,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
-import android.support.annotation.IntRange;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.IntRange;
 
 import com.adrian.gomoku.R;
 import com.adrian.gomoku.ai.KGomokuAI;

@@ -1,8 +1,8 @@
 package com.adrian.gomoku.ai
 
 import android.graphics.Point
-import android.support.annotation.IntRange
 import android.util.Log
+import androidx.annotation.IntRange
 import com.adrian.gomoku.BuildConfig
 
 /**

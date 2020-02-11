@@ -46,6 +46,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1.0"
                         android:background="@drawable/bg_0_thumb"
+                        android:checked="true"
                         android:button="@drawable/bg_selector"
                         android:gravity="center" />
 

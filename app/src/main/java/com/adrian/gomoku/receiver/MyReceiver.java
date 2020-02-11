@@ -4,10 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 
 import com.adrian.gomoku.service.DownloadService;
-import com.adrian.gomoku.tools.CommUtil;
 
 public class MyReceiver extends BroadcastReceiver {
 

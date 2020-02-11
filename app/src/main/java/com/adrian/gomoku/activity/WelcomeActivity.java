@@ -15,8 +15,16 @@ import com.adrian.gomoku.R;
 import com.adrian.gomoku.tools.CommUtil;
 import com.adrian.gomoku.tools.ImageUtil;
 import com.adrian.gomoku.tools.PermissionHelper;
+import com.huawei.hms.ads.AdParam;
+import com.huawei.hms.ads.reward.Reward;
+import com.huawei.hms.ads.reward.RewardAd;
+import com.huawei.hms.ads.reward.RewardAdLoadListener;
+import com.huawei.hms.ads.reward.RewardAdStatusListener;
 
 public class WelcomeActivity extends BaseActivity {
+
+    private static final String AD_ID = "testx9dtjwj8hp";
+    private RewardAd rewardAd;
 
     private ImageView mBgIV;
     private PermissionHelper mPermissionHelper;
@@ -40,7 +48,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void initVariables() {
-//        AdManager.getInstance(this).init("d04d2ef88fffe41b", "ea11dd60a66886f9", true, true);
+        loadRewordAd();
     }
 
     @Override
@@ -113,7 +121,62 @@ public class WelcomeActivity extends BaseActivity {
                 new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         params.addRule(RelativeLayout.ABOVE, R.id.view_divider);
 
-        handler.sendEmptyMessageDelayed(0, 3000);
+//        handler.sendEmptyMessageDelayed(0, 3000);
+    }
+
+    private void loadRewordAd() {
+        if (rewardAd == null) {
+            rewardAd = new RewardAd(this, AD_ID);
+        }
+        RewardAdLoadListener loadListener = new RewardAdLoadListener() {
+            @Override
+            public void onRewardAdFailedToLoad(int i) {
+                super.onRewardAdFailedToLoad(i);
+                showShortToast("广告加载失败");
+                handler.sendEmptyMessageDelayed(0, 3000);
+            }
+
+            @Override
+            public void onRewardedLoaded() {
+                super.onRewardedLoaded();
+                showShortToast("广告加载成功");
+                rewardAdShow();
+            }
+        };
+        rewardAd.loadAd(new AdParam.Builder().build(), loadListener);
+    }
+
+    private void rewardAdShow() {
+        if (rewardAd.isLoaded()) {
+            rewardAd.show(this, new RewardAdStatusListener() {
+                @Override
+                public void onRewardAdClosed() {
+                    super.onRewardAdClosed();
+                    showShortToast("广告被关闭");
+                    handler.sendEmptyMessage(0);
+                }
+
+                @Override
+                public void onRewardAdFailedToShow(int i) {
+                    super.onRewardAdFailedToShow(i);
+                    showShortToast("广告展示失败");
+                    handler.sendEmptyMessageDelayed(0, 3000);
+                }
+
+                @Override
+                public void onRewardAdOpened() {
+                    super.onRewardAdOpened();
+                    showShortToast("广告被打开");
+                }
+
+                @Override
+                public void onRewarded(Reward reward) {
+                    super.onRewarded(reward);
+                    showShortToast("广告奖励达成");
+                    handler.sendEmptyMessage(0);
+                }
+            });
+        }
     }
 
     @Override

@@ -2,19 +2,16 @@ package com.adrian.gomoku.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.adrian.gomoku.R;
-import com.adrian.gomoku.fragment.MainFragment;
 import com.adrian.gomoku.tools.ParamUtil;
 import com.adrian.gomoku.views.MultipleRadioGroup;
-import com.adrian.gomoku.views.RippleButton;
 import com.adrian.gomoku.views.RippleView;
 import com.larswerkman.holocolorpicker.ColorPicker;
 import com.larswerkman.holocolorpicker.OpacityBar;

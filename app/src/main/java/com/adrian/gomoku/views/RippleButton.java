@@ -10,11 +10,12 @@ import android.graphics.Path;
 import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.Shader;
-import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
+
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.adrian.gomoku.R;
 import com.nineoldandroids.animation.Animator;
