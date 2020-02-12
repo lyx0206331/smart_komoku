@@ -18,6 +18,7 @@ import com.adrian.gomoku.R;
 import com.adrian.gomoku.tools.CommUtil;
 import com.adrian.gomoku.tools.ParamUtil;
 import com.adrian.gomoku.views.GomokuView;
+import com.umeng.analytics.MobclickAgent;
 
 import de.cketti.library.changelog.ChangeLog;
 
@@ -136,6 +137,18 @@ public class MainFragment extends Fragment implements GomokuView.IGameOverListen
                 mGomokuView.start();
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("MainFragment");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("MainFragment");
     }
 
     @Override

@@ -48,7 +48,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void initVariables() {
-        loadRewordAd();
+        loadjHuaweiRewordAd();
     }
 
     @Override
@@ -124,7 +124,10 @@ public class WelcomeActivity extends BaseActivity {
 //        handler.sendEmptyMessageDelayed(0, 3000);
     }
 
-    private void loadRewordAd() {
+    /**
+     * 加载华为广告
+     */
+    private void loadjHuaweiRewordAd() {
         if (rewardAd == null) {
             rewardAd = new RewardAd(this, AD_ID);
         }
